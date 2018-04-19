@@ -3,23 +3,19 @@
 \author{\v{Z}iga Sajovic, Martin Vuk}
 
 \begin{document}
+
 \maketitle
 
 \section{Introduction}
 
 
-With names as Differentiable programming, and Software 2.0. becoming attached to deep learning, it is showing itself to be more than a black-box machine learning algorithm, but a new programming paradigm.
+Von Neumann languages do not have useful properties for reasoning about programs. Axiomatic and denotational semantics are precise tools for describing and understanding conventional programs, but they only talk about them and cannot alter their ungainly
+properties \cite{backus}. This issue raised by John Backus has partially been addressed by algebraic data types employed by functional programming, where a mapping has been shown between grammars and semirings; for an example of how this algebraic view is used to show an isomorphism between data types, see \cite{7Trees}. Yet due to the lack of inverses (hence the semiring structure) we remain limited in the algebraic manipulations we are allowed to employ; for an explanation via a connection between objects of categories and complex numbers see \cite{complexCat}. This leaves one intrigued, but wanting, as the existence of inverses is what gives algebra its true power -- the ability to solve equations.
 
-Usual treaties of programs, with precise denotational semantics only talks about programs, without the ability to manipulate their properties. This has partially been addressed by algebraic data types employed by functional programming, where a connection has been shown between grammars and semirings; for an example of how this algebraic view is used to show an isomorphism between data types, see \cite{7Trees}. Yet the lack of inverses (hence the semiring structure) we remain limited in the algebraic manipulations we are allowed to employ \cite{complexCat}.
-
-Due to it (Deep Learning) being rooted in tensor algebra, its paradigm has the ability to address such issues, \emph{because unlike von Neumann languages, the language of ordinary algebra is suitable both for stating its laws and for transforming
+In recent times, names like \emph{Differentiable Programming} and \emph{Software $2.0$} have attached themselves to Deep learning, as it has shown itself to be more than a collection of machine learning algorithms; it is emerging as a new programming paradigm. But because the field is still in its youth, most of the advances come as a result of empirical investigations. Yet, as it is founded on rigorous mathematical objects, it offers an opportunity to be formalized as a language. And as it is rooted in tensor algebra, it holds the ability to address the outlined issues, because \emph{unlike von Neumann languages, the language of ordinary algebra is suitable both for stating its laws and for transforming
 an equation into its solution, all within the language} \cite{backus}.
 
-With most of the work in the field being empirical, the field lacks a formal theory that would ease theoretical investigations.
-
-With the right formalism in-place, deep learning becomes a solution to these problems.
-
-analysis and programming
+%analysis and programming and algebra
 
 \printbibliography
 
