@@ -51,6 +51,7 @@ program in specific programming language.
 At first glance, the \emph{Euclidean machine} seems like a description of functional programming, with its compositions inherited from $\F$. An intended impression, as we wish for the \emph{Euclidean machine} to build on its elegance. But note that in the coming section an additional restriction is imposed on $\F$; that of its elements being differentiable.
 
 \section{Differentiable Maps and Programs}
+
 To define differentiable programs, let us first recall some
 definitions from multivariate calculus.
 \begin{definition}[Derivative]
@@ -73,7 +74,7 @@ derivatives of the components of the map $P$
 We assume for the remainder of this section that the map $P:V\to U$ is
 differentiable for all $\x\in V$. The derivative defines a map from $V$ to
 linear bounded maps from $V$ to $U$. We further assume $U$ and $V$ are finite
-dimensional. Then the space of linear maps from $V$ to $U$ is isomorphic to
+dimensional. Then the space of linear maps from $V$ to $U$ is isomorphic to the
 tensor product $U\otimes V^*$, where the isomorphism is given by the
 tensor contraction, sending a simple tensor $\uu\otimes f\in U\otimes
 V^*$ to a linear map
@@ -117,6 +118,214 @@ directional (partial) derivatives by the formula
       x_{\alpha_1}\ldots \partial x_{\alpha_k}}\e_i\otimes
     dx_{\alpha_1}\otimes\ldots \otimes dx_{\alpha_k}.
 \end{equation}
+
+\subsection{Differentiable Programs}
+
+We want to be able to represent the derivatives of a computer program in an
+\emph{Euclidean machine} again as a program in the same \emph{Euclidean machine}. We define three subspaces of the virtual memory space $\VV$, that
+describe how different parts of the memory influence the final result of the
+program.   
+
+Denote by $\e_1,\ldots \e_n$ a standard basis of the memory space $\VV$ and by
+$x_1,\ldots x_n$ the dual basis of $\VV^*$. The functions $x_i$ are coordinate
+functions on $\VV$ and correspond to individual locations(variables) in the
+program memory.
+
+\begin{definition}
+  For each program $P$ in the programming space $\F<\VV^\VV$,
+  we define the \emph{input} or \emph{parameter space} $I_P<\VV$ and the
+  \emph{output space} $O_P<\VV$ to be the minimal vector sub-spaces spanned by
+  the standard basis vectors, such that the map $P_e$, defined by the following
+  commutative diagram 
+\begin{equation} 
+    \label{eq:induced_map}
+\begin{tikzcd}
+  \VV \arrow{r}{P} & 
+  \VV \arrow{d}{\mathrm{pr}_{O_P}}\\
+  I_P \arrow[hook]{u}{\vec{i}\mapsto \vec{i}+\vec{f}} 
+  \arrow{r}{P_e}& O_P
+\end{tikzcd}
+  \end{equation}
+does not depend of the choice of the element 
+$\vec{f}\in F_P=(I_P+O_P)^\perp$.
+
+The space $F_P=(I_P+O_P)^\perp$ is called \emph{free space} of the program $P$.
+\end{definition}
+
+The variables $x_i$ corresponding to standard
+basis vectors spanning the parameter, output and free space are called
+\emph{paramters} or \emph{input variables}, \emph{output variables} and
+\emph{free variables} correspondingly. Free variables are those that are
+left intact by the program and have no influence on the final result other than
+their value itself. The output of the program depends only on the values
+of the input variables and consists of variables that have changed during
+the program. Input parameters and output values might overlap. 
+
+The map $P_e$ is called the \emph{effective map} of the program $P$ and
+describes the actual effect of the program $P$ on the memory,
+ignoring the free memory. 
+
+The derivative of the effective map is of interest, when we speak about
+differentiability of computer programs. 
+\begin{definition}[Automatically differentiable programs]
+  \label{def:program_derivative}
+  A program $P:\VV\to \VV$ is \emph{automatically differentiable} if there exist
+  an embedding of the space $O_P\otimes I_P^*$ into the free space $F_P$, and a program $(1+\D P):\VV\to \VV$,
+  such that its effective map is the map
+  \begin{equation}
+    \label{eq:program_derivative}
+    P_e\oplus \D P_e:I_P\rightarrow O_P\oplus (O_P\otimes I^*).
+  \end{equation}
+  A program $P:\VV\to \VV$ is \emph{automatically differentiable of order $k$}
+  if there exist a program $\sumd_k P:\VV\to \VV$,
+  such that its effective map is the map
+  \begin{equation}
+    \label{eq:program_derivative_higher}
+    P_e\oplus \D P_e\oplus \ldots \D^k P_e:I_P\rightarrow O_P\oplus \left(O_P\otimes I^*\right)\oplus\ldots \left( O_P\otimes \left( I_p^*\right)^{k\otimes} \right).
+  \end{equation}
+\end{definition}
+
+If a program $P:\VV\to \VV$ is automatically differentiable then it is also
+differentiable as a map $\VV\to\VV$. However only the derivative of program's
+effective map can be implemented as a program, since the memory space is limited to $\VV$. 
+To be able to differentiate a program to the $k$-th order, we have to calculate
+and save all the derivatives of the orders $k$ and less.
+
+\section{Differentiable Programming Spaces}
+
+The memory space of a program is rarely treated as more than a storage. But to endow the \emph{Euclidean machine} with extra structure, this is precisely what to focus on. Loosely speaking, functional programming is described by monoids, as a (multi)linear algebra description of the memory space seems the appropriate step to take in attaining the wanted structure.
+
+\subsection{Memory space}
+
+Motivated by the Definition
+\ref{def:program_derivative}, we define
+the \emph{memory space} for differentiable programs  as a sequence of vector spaces with
+the recursive formula
+\begin{eqnarray}
+  \VV_0 &=& \VV\\
+  \label{eq:universal_space}
+  \VV_k &=& \VV_{k-1}+\left(\VV_{k-1}\otimes \VV^*\right).
+\end{eqnarray}
+Note that the sum is not direct, since some of the subspaces of $\VV_{k-1}$ and
+$\VV_{k-1}\otimes \VV^*$ are naturally isomorphic and will be
+identified\footnote{The spaces $\VV\otimes(\VV^*)^{\otimes (j+1)}$ and
+  $\VV\otimes (\VV^*)^{\otimes j}\otimes \VV^*$ are naturally isomorphic and
+  will be identified in the sum.
+}.
+
+  The space that satisfies the recursive formula (\ref{eq:universal_space}) is
+  \begin{equation}
+    \label{eq:k-th-virtual-space}
+    \VV_k = \VV\otimes \left(K\oplus \VV^* \oplus (\VV^*\otimes \VV^*)\oplus\ldots
+      (\VV^*)^{\otimes k}\right) = \VV\otimes T_k(\VV^*),
+  \end{equation}
+  where $T_k(\VV^*)$ is a subspace of \emph{tensor algebra} $T(\VV^*)$, consisting of
+  linear combinations of tensors of rank less or equal $k$. This construction
+  enables us to define all the derivatives as maps with 
+  the same domain and codomain $\VV\to \VV\otimes T(\VV^*)$.
+
+  As such, the memory space is a mapping from-and-to itself,
+\begin{equation}
+\VV_n:\VV\to\VV,
+\end{equation}
+which is, for an arbitrary $\bfW\in\VV_n$, defined as, 
+\begin{equation}
+\bfW(\vv)=\bfw_0+\bfw_1\cdot\vv+\cdots+\bfw_n\cdot(\vv)^{\otimes n}\label{eq:Contraction},
+\end{equation}
+the sum of multiple contractions (where $\bfw_i\in\VV_i$). The expression \eqref{eq:Contraction} will be rigorously defined in section \ref{sec:Vrsta}. With such a construction, the expansions and contractions of the memory space (reminiscent to the breathing of the stack) would hold meaning parallel to storing values; which is exactly what motives the next definition.
+
+\begin{definition}[Virtual memory space]\label{def:VV}
+Let $(\VV,\F)$ be an Euclidean machine and let  
+
+\begin{equation}
+\VV_\infty = \VV\otimes T(\VV^*) = \VV\oplus
+(\VV\otimes\VV^*)\oplus\ldots,\label{eq:virtual-memory}
+\end{equation}
+where $T(\VV^*)$ is the tensor algebra of the dual space $\VV^*$.
+We call $\VV_\infty$ the \emph{virtual memory space} of a \emph{Euclidean machine} $(\VV,\F)$.
+\end{definition}
+The term virtual memory is used as it is only possible to embed certain subspaces of $\VV_\infty$ into memory space $\VV$, making it similar to
+virtual memory as a memory management technique. 
+
+We can extend each program $P:\VV\to \VV$ to the map on
+universal memory space $\VV_\infty$ by setting the first component in the direct sum
+\eqref{eq:virtual-memory} to $P$, and all other components to zero. Similarly
+derivatives $\D^k P$ can be also seen as maps  from $\VV$ to $\VV_\infty$ by
+setting $k$-th component in the direct sum \eqref{eq:virtual-memory} to $\D^k P$
+and all others to zero.
+
+\subsection{Differentiable Programming Spaces}
+
+Let us define the following function spaces:
+ \begin{equation}\label{eq:F_n}
+  \F_n=\{f:\VV\to \VV\otimes T_n(\VV^*)\}
+ \end{equation}
+All of these function spaces can be seen as sub spaces of $\F_\infty=\{f:\VV\to \VV\otimes
+T(\VV^*)\}$, since $\VV$ is naturally embedded into $ \VV\otimes T(\VV^*)$. The
+Fréchet derivative defines an operator on the space of smooth maps in $\F_\infty$\footnote{The operator $\D$ may be defined partially for other maps as
+   well, but we will handle this case later.}. We denote this operator $\D$. The image of any map
+ $P:\VV\to \VV$ by operator $\D$ is its first derivative, while the higher order
+ derivatives are just powers of operator $\D$ applied to $P$.
+ Thus $\D^k$ is a mapping between function spaces $\eqref{eq:F_n}$
+ \begin{equation}\label{eq:toFn+k}
+ \D^k:\F^n\to\F^{n+k}.
+ \end{equation}
+ 
+ 
+ \begin{definition}[Differentiable programming space]\label{def:dP}
+  A \emph{differentiable programming space} $\dP_0$ is any subspace of $\F_0$ such that
+  \begin{equation}\label{eq:P}
+  \D\dP_0\subset\dP_0\otimes T(\VV^*)
+\end{equation}
+The space $\dP_n<\F_n$ spanned by $\{\D^k\dP_0;\quad 0\le k\le n\}$ over $K$, is
+called a differentiable programming space of order $n$. When all elements of
+$\dP_0$ are analytic, we call $\dP_0$ an \emph{analytic programming space}. 
+ \end{definition}
+The definition of higher order differentiable programming spaces is justified by the following theorem. 
+\begin{theorem}[Infinite differentiability]\label{izr:P}
+  Any differentiable programming space $\dP_0$ is an
+  infinitely differentiable programming space, meaning that
+  \begin{equation}\label{eq:P_n}
+      \D^k\dP_0\subset\dP_0\otimes T(\VV^*)
+    \end{equation}
+for any $k\in\mathbb{N}$.
+\end{theorem}
+\begin{proof} By induction on order $k$. For $k=1$ the claim holds by definition. Assume  $\forall_{P\in\dP_0}$,
+  $\D^n\dP_0\subset\dP_0\otimes T(\VV^*)$. Denote by $P_{\alpha,k}^i$ the
+  component of the $k$-th derivative for a multiindex $\alpha$  denoting the
+  component of $T(\VV^*)$ and an index $i$ denoting the component of $\VV$.
+  \begin{equation}\label{eq:inductionStep}
+\D^{n+1}P_{\alpha,k}^i=\D(\D^n P^i_\alpha)_k\land(\D^n P^i_\alpha)\in\dP_0\implies \D(\D^n P^i_\alpha)_k\in \dP_0\otimes T(\VV^*)
+  \end{equation}
+  $$\implies$$
+  $$\D^{n+1}\dP_0\subset\dP_0\otimes T(\VV^*)$$
+Thus by induction, the claim holds for all $k\in \mathbb{N}$. 
+\end{proof}
+
+
+
+ \begin{corollary}\label{izr:P_n}
+  A differentiable programming space of order $n$, $\dP_n:\VV\to \VV\otimes
+  T(\VV^*)$, can be embedded into the tensor 
+  product of the function space $\dP_0$ and the space $T_n(\VV^*)$ of
+  multi-tensors of order less than equal $n$:
+  \begin{equation}
+    \label{eq:D_p_embed}
+    \dP_n<\dP_0\otimes T_n(\VV^*).
+  \end{equation}
+ \end{corollary}
+ 
+By taking the limit as $n\to \infty$, we consider 
+  
+  \begin{equation}
+  \label{eq:P_algebra}
+        \dP_\infty < \dP_0\otimes \T(\VV^*),
+  \end{equation}
+where $\T(\VV^*)=\prod_{k=0}^\infty (\VV^*)^{\otimes k}$ is the \emph{tensor series
+  algebra}, the algebra of the infinite formal tensor series.\footnote{The
+  tensor series algebra is a completion of the tensor algebra $T(\VV^*)$ in suitable topology.}
+
+
 
 \printbibliography
 
