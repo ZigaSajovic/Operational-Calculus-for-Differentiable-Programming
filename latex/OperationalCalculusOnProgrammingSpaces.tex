@@ -24,7 +24,7 @@ TODO: what the paper contains etc.
 
 We will model computer programs as maps on a vector space. If
 we only focus on the real valued variables (of type \texttt{float} or
-\texttt{double}), the state of the virtual memory can be seen as a high
+\texttt{double}), the state of the memory can be seen as a high
 dimensional vector\footnote{We assume the variables of interest to be of type \texttt{float} for
   simplicity. Theoretically any field can be used instead of $\RR$.}. 
 A set of all the possible states of the program's memory,
@@ -48,7 +48,75 @@ program in specific programming language.
   \end{itemize}  
 \end{definition}
 
-At first glance, the \emph{Euclidean machine} seems like a description of functional programming, with its compositions inherited from $\F$. An intended impression, as we wish for the \emph{Euclidean machine} to build on its elegance. But note that in the coming section and additional restriction is imposed on $\F$, that of its elements being differentiable.
+At first glance, the \emph{Euclidean machine} seems like a description of functional programming, with its compositions inherited from $\F$. An intended impression, as we wish for the \emph{Euclidean machine} to build on its elegance. But note that in the coming section an additional restriction is imposed on $\F$; that of its elements being differentiable.
+
+\section{Differentiable Maps and Programs}
+To define differentiable programs, let us first recall some
+definitions from multivariate calculus.
+\begin{definition}[Derivative]
+  Let $V,U$ be Banach spaces. A map $P:V\to U$ is differentiable at a point
+  $\x\in V$, if there exists a linear bounded operator $TP_\x:V\to U$ such that
+  \begin{equation}
+    \label{eq:frechet}
+    \lim_{\h\to 0}\frac{\|P(\x+\h)-P(\x)-TP_\x(\h)\|}{\|\h\|} = 0.
+  \end{equation}
+  The map $TP_\x$ is called the \emph{Fréchet derivative} of the map $P$ at the
+  point $\x$.
+\end{definition}
+For maps $\RR^n\to \RR^m$ Fréchet derivative can be expressed by multiplication
+of vector $\h$ by the Jacobi matrix $\mathbf{J}_{P,\x}$ of partial
+derivatives of the components of the map $P$
+\begin{equation*}
+  T_\x P(\h) = \mathbf{J}_{P,\x}\cdot \h.
+\end{equation*}
+
+We assume for the remainder of this section that the map $P:V\to U$ is
+differentiable for all $\x\in V$. The derivative defines a map from $V$ to
+linear bounded maps from $V$ to $U$. We further assume $U$ and $V$ are finite
+dimensional. Then the space of linear maps from $V$ to $U$ is isomorphic to
+tensor product $U\otimes V^*$, where the isomorphism is given by the
+tensor contraction, sending a simple tensor $\uu\otimes f\in U\otimes
+V^*$ to a linear map
+ \begin{equation}
+   \label{eq:lin_tenzor}
+   \uu\otimes f:\x \mapsto f(\x)\cdot \uu.
+ \end{equation}
+The derivative defines a map
+\begin{eqnarray}
+  \label{eq:odvod_preslikava}
+  \D P&:& V\to U\otimes V^*\\
+  \D P&:& \x \mapsto T_\x P.
+\end{eqnarray}
+One can consider the differentiability of the derivative itself $\D P$ by
+looking at it as a map \eqref{eq:odvod_preslikava}. This leads to the definition
+of the higher derivatives.
+\begin{definition}[higher derivatives]
+  \label{def:higher_derivatives}
+  Let $P:V\to U$ be a map from vector space $V$ to vector space $U$. 
+The derivative $\D^k P$ of order $k$ of the map $P$ is the map
+\begin{eqnarray}\label{eq:partial}
+    \label{eq:visji_odvod}
+    \D^kP&:&V\to U\otimes (V^*)^{\otimes k}\\
+    \D^kP&:&\x\mapsto T_\x\left( \D^{k-1}P \right)
+  \end{eqnarray}
+\end{definition} 
+\begin{remark}
+  For the sake of clarity, we assumed in the definition above, that the map $P$
+  as well as all its derivatives are differentiable at all points $\x$. If this
+  is not the case, 
+  definitions above can be done locally, which would introduce mostly technical
+  difficulties. 
+\end{remark}
+Let $\e_1,\ldots,\e_n$ be a basis of $U$ and $x_1,\ldots x_m$ the basis of
+$V^*$. Denote by $P_i=x_i\circ P$ the $i-th$ component of the map
+$P$ according to the basis $\{\e_i\}$ of $U$.
+Then $\D^kP$  can be defined in terms of
+directional (partial) derivatives by the formula
+\begin{equation}\label{eq:d}
+  \partial^kP=\sum_{\forall_{i,\alpha}}\frac{\partial^k P_i}{\partial
+      x_{\alpha_1}\ldots \partial x_{\alpha_k}}\e_i\otimes
+    dx_{\alpha_1}\otimes\ldots \otimes dx_{\alpha_k}.
+\end{equation}
 
 \printbibliography
 
