@@ -354,7 +354,59 @@ The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiabl
 \end{equation}
 are basic programs in a virtual tensor machine (the vanilla fully connected neural network is  captured by the restriction $\forall_i(W_i\in\VV_1)$). The formulation \eqref{eq:tenWord} is trivially generalized to convolutional models, but is omitted here for brevity.
 
+\section{Operational Calculus on Programming Spaces}\label{sec:operational}
 
+
+By Corollary $\ref{izr:P_n}$ we may represent calculation of derivatives of the
+map $P:\VV\to \VV$, with only one mapping $\sumd$. We define the operator
+$\sumd_n$ as a direct sum of operators
+ 
+ \begin{equation}\label{eq:DD}
+    \sumd_n = 1+\D +\D^2 +\ldots + \D^n 
+  \end{equation}
+  
+The image $\sumd_kP(\x)$ is a multi-tensor of order $k$, which is a direct sum of the map's value and all derivatives of order $n\le k$, all evaluated at the point $\x$:
+\begin{equation}
+  \label{eq:multi_odvod}
+  \sumd_kP(\x) = P(\mathbf{x})+\partial_\mathbf{x} P(\mathbf{x}) + \partial^2_\mathbf{x} P(\mathbf{x}) + \ldots + \partial^k_\mathbf{x} P(\mathbf{x}).
+\end{equation}
+The operator $\sumd_n$ satisfies the recursive relation:
+  \begin{equation}
+    \label{eq:potenca(1+d)}
+    \sumd_{k+1}=1+\D\sumd_{k},
+  \end{equation}
+that can be used to recursively construct programming spaces of arbitrary order. 
+\begin{proposition}
+Only explicit knowledge of $\sumd_1:\dP_0\to\dP_1$ is required for the
+construction of $\dP_n$ from $\dP_1$. 
+\end{proposition}
+\begin{proof}
+  The construction is achieved following the argument $\eqref{eq:inductionStep}$ of the proof of Theorem \ref{izr:P}, allowing simple implementation, as dictated by $\eqref{eq:potenca(1+d)}$. 
+\end{proof}
+        
+\begin{remark}\label{rem:vTen}
+Maps $\VV\otimes T(\VV^*)\to \VV\otimes T(\VV^*)$ are constructible using
+tensor algebra operations and compositions of programs in $\dP_n$.
+\end{remark}
+       
+\begin{definition}[Algebra product]
+ For any bilinear map
+ $$\cdot :\VV\times \VV\to \VV$$
+ we can define a
+ bilinear product $\cdot$ on $\VV\otimes \T(\VV^*)$ by the following rule on the
+ simple tensors:
+ \begin{equation}
+   \label{eq:algebra_product}
+   (\vv\otimes f_1\otimes\ldots f_k) \cdot (\uu\otimes g_1\otimes\ldots g_l)=
+(\vv\cdot \uu)\otimes f_1\otimes\ldots f_k\otimes g_1\otimes\ldots g_l 
+ \end{equation}
+extending linearly on the whole space $\VV\otimes\T(\VV^*)$
+\end{definition}
+\begin{theorem}[Programming algebra]\label{izr:alg}
+ For any bilinear map $\cdot :\VV\times \VV\to \VV$ an infinitely-differentiable
+ programming space $\dP_\infty$ is a function algebra, with the product defined
+ by \eqref{eq:algebra_product}.
+\end{theorem}
 
 
 \printbibliography
