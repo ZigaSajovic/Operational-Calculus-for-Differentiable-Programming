@@ -18,7 +18,10 @@ And as it is rooted in tensor algebra, it holds the ability to address the outli
 an equation into its solution, all within the language} \cite{backus}.
 Furthermore, due of its innate relationship with calculus, a language encompassing it would serve as a formal gateway of analysis into programming.
 
-TODO: what the paper contains etc.
+TODO: Finish the introduction, notes in the .tex
+
+%a language in which basic words are neural networks
+
 
 \section{Computer Programs as Maps on a Vector Space}
 
@@ -232,7 +235,7 @@ which is, for an arbitrary $\bfW\in\VV_n$, defined as,
 \begin{equation}
 \bfW(\vv)=\bfw_0+\bfw_1\cdot\vv+\cdots+\bfw_n\cdot(\vv)^{\otimes n}\label{eq:Contraction},
 \end{equation}
-the sum of multiple contractions (where $\bfw_i\in\VV_i$). The expression \eqref{eq:Contraction} will be rigorously defined in section \ref{sec:Vrsta}. With such a construction, the expansions and contractions of the memory space (reminiscent to the breathing of the stack) would hold meaning parallel to storing values; which is exactly what motives the next definition.
+the sum of multiple contractions (where $\bfw_i\in\VV_i$). The expression \eqref{eq:Contraction} will be rigorously defined in section \ref{sec:Vrsta}. With such a construction, the expansions and contractions of the memory space (reminiscent to the breathing of the stack) would hold meaning parallel to storing values; which is what motives the next definition.
 
 \begin{definition}[Virtual memory space]\label{def:VV}
 Let $(\VV,\F)$ be an Euclidean machine and let  
@@ -324,6 +327,33 @@ By taking the limit as $n\to \infty$, we consider
 where $\T(\VV^*)=\prod_{k=0}^\infty (\VV^*)^{\otimes k}$ is the \emph{tensor series
   algebra}, the algebra of the infinite formal tensor series.\footnote{The
   tensor series algebra is a completion of the tensor algebra $T(\VV^*)$ in suitable topology.}
+
+\subsection{Virtual Tensor Machine}
+
+We propose an abstract computational model, that is capable of constructing differentiable programming spaces. Such a model provides a
+framework for analytic study of programs by algebraic means. 
+
+Following from Theorem \ref{thm:infDif}, the tuple $(\VV, \dP_0)$ -- together with the structure of the tensor algebra $T(\VV^*)$ -- is sufficient for constructing differentiable programming spaces $\dP_\infty$, using linear combinations of elements of $\dP_0\otimes T(\VV^*)$. This motivates the following definition.
+
+\begin{definition}[Virtual tensor machine]\label{def:analyticMachine}
+The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiable virtual machine, where
+   
+    \begin{itemize}
+    \item
+    $\VV$ is a finite dimensional vector space
+    \item
+    $\VV\otimes \T(\VV^*)$ is the virtual memory space
+    \item
+    $\dP_0$ is an analytic programming space over $\VV$.
+    \end{itemize}
+  \end{definition}
+
+\noindent When composing contractions \eqref{eq:Contraction} of the memory with activation functions $\phi\in\dP$, we note that fully connected \emph{tensor networks},
+\begin{equation} \label{eq:tenWord}
+\NN(v)=\phi_k\circ W_k\circ\cdots\circ\phi_0\circ W_0(v),
+\end{equation}
+are basic programs in a virtual tensor machine (the vanilla fully connected neural network is  captured by the restriction $\forall_i(W_i\in\VV_1)$). The formulation \eqref{eq:tenWord} is trivially generalized to convolutional models, but is omitted here for brevity.
+
 
 
 
