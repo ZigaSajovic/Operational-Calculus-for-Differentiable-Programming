@@ -1,5 +1,5 @@
 \input{../latexCommon/preamble.tex}
-\title{Operational calculus on Programming Spaces}
+\title{Operational Calculus on Programming Spaces}
 \author{\v{Z}iga Sajovic, Martin Vuk}
 
 \begin{document}
@@ -8,14 +8,47 @@
 
 \section{Introduction}
 
-
 Von Neumann languages do not have useful properties for reasoning about programs. Axiomatic and denotational semantics are precise tools for describing and understanding conventional programs, but they only talk about them and cannot alter their ungainly
 properties \cite{backus}. This issue raised by John Backus has partially been addressed by algebraic data types employed by functional programming, where a mapping has been shown between grammars and semirings; for an example of how this algebraic view is used to show an isomorphism between data types, see \cite{7Trees}. Yet due to the lack of inverses (hence the semiring structure) we remain limited in the algebraic manipulations we are allowed to employ; for an explanation via a connection between objects of categories and complex numbers see \cite{complexCat}. This leaves one intrigued, but wanting, as the existence of inverses is what gives algebra its true power -- the ability to solve equations.
 
-In recent times, names like \emph{Differentiable Programming} and \emph{Software $2.0$} have attached themselves to Deep learning, as it has shown itself to be more than a collection of machine learning algorithms; it is emerging as a new programming paradigm. But because the field is still in its youth, most of the advances come as a result of empirical investigations. Yet, as it is founded on rigorous mathematical objects, it offers an opportunity to be formalized as a language. And as it is rooted in tensor algebra, it holds the ability to address the outlined issues, because \emph{unlike von Neumann languages, the language of ordinary algebra is suitable both for stating its laws and for transforming
+In recent times, names like \emph{Differentiable Programming} and \emph{Software $2.0$} have attached themselves to Deep learning, as it has shown itself to be more than a collection of machine learning algorithms; it is emerging as a new programming paradigm.
+But because the field is still in its youth, most of the advances come as a result of empirical investigations.
+Yet, as it is founded on rigorous mathematical objects, it offers an opportunity to be formalized as a language.
+And as it is rooted in tensor algebra, it holds the ability to address the outlined issues, because \emph{unlike von Neumann languages, the language of ordinary algebra is suitable both for stating its laws and for transforming
 an equation into its solution, all within the language} \cite{backus}.
+Furthermore, due of its innate relationship with calculus, a language encompassing it would serve as a formal gateway of analysis into programming.
 
-%analysis and programming and algebra
+TODO: what the paper contains etc.
+
+\section{Computer Programs as Maps on a Vector Space}
+
+We will model computer programs as maps on a vector space. If
+we only focus on the real valued variables (of type \texttt{float} or
+\texttt{double}), the state of the virtual memory can be seen as a high
+dimensional vector\footnote{We assume the variables of interest to be of type \texttt{float} for
+  simplicity. Theoretically any field can be used instead of $\RR$.}. 
+A set of all the possible states of the program's memory,
+can be modeled by a finite dimensional real vector space $\VV\equiv \RR^n$. We
+will call $\VV$ the \emph{memory space of the program}. The effect of a computer
+program on its memory space $\VV$, can be described by a map
+\begin{equation}
+  \label{eq:map}
+  P:\VV\to \VV.
+\end{equation}
+A programming space is a space of maps $\VV\to\VV$ that can be implemented as a
+program in specific programming language. 
+\begin{definition}[Euclidean machine] The tuple $(\VV,\F)$ is an Euclidean machine, where
+  \begin{itemize}
+  \item
+  $\VV$ is a finite dimensional vector space over a complete field $K$, serving
+  as memory\footnote{In most applications the field $K$ will
+    be $\RR$}
+  \item
+  $\F< \VV^\VV$ is a subspace of the space of maps $\VV\to \VV$, called \emph{programming space}, serving as actions on the memory.
+  \end{itemize}  
+\end{definition}
+
+At first glance, the \emph{Euclidean machine} seems like a description of functional programming, with its compositions inherited from $\F$. An intended impression, as we wish for the \emph{Euclidean machine} to build on its elegance. But note that in the coming section and additional restriction is imposed on $\F$, that of its elements being differentiable.
 
 \printbibliography
 
