@@ -22,6 +22,14 @@ TODO: Finish the introduction, notes in the .tex
 
 %a language in which basic words are neural networks
 
+%first we will build a tensor machine, its like building a language
+%than we will "code" the needed operators inside the language, like bootstraping a compiler in OpCalOnProgSpac
+
+%such algebraic languages where the same language can be used to implement and study the implemented procedure
+%in machine learning where structures are mathematical this seems very important
+
+%treating it like a language we implement operators, that abstract away the gorey details of tensor series etc.
+
 
 \section{Computer Programs as Maps on a Vector Space}
 
@@ -333,7 +341,7 @@ where $\T(\VV^*)=\prod_{k=0}^\infty (\VV^*)^{\otimes k}$ is the \emph{tensor ser
 We propose an abstract computational model, that is capable of constructing differentiable programming spaces. Such a model provides a
 framework for analytic study of programs by algebraic means. 
 
-Following from Theorem \ref{thm:infDif}, the tuple $(\VV, \dP_0)$ -- together with the structure of the tensor algebra $T(\VV^*)$ -- is sufficient for constructing differentiable programming spaces $\dP_\infty$, using linear combinations of elements of $\dP_0\otimes T(\VV^*)$. This motivates the following definition.
+Following from Theorem \ref{izr:P}, the tuple $(\VV, \dP_0)$ -- together with the structure of the tensor algebra $T(\VV^*)$ -- is sufficient for constructing differentiable programming spaces $\dP_\infty$, using linear combinations of elements of $\dP_0\otimes T(\VV^*)$. This motivates the following definition.
 
 \begin{definition}[Virtual tensor machine]\label{def:analyticMachine}
 The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiable virtual machine, where
@@ -407,6 +415,251 @@ extending linearly on the whole space $\VV\otimes\T(\VV^*)$
  programming space $\dP_\infty$ is a function algebra, with the product defined
  by \eqref{eq:algebra_product}.
 \end{theorem}
+
+ \subsection{Tensor Series Expansion}\label{sec:Vrsta}
+
+%With this, the basis of our framework has been established.
+%We can now start implementing operators, that serve the desired purpose
+%The first thing we need is an operator thaz would shift the function from its initial value
+%This can than be used for implementing iterators and composers
+
+In th space spanned by the set $\DD^n=\{\D^k;\quad 0\le k\le n\}$ over a field $K$, such an operator can be defined as
+ \begin{equation*}
+  e^{h\D}=\sum\limits_{n=0}^{\infty}\frac{(h\D)^n}{n!}
+ \end{equation*}
+ In coordinates, the operator $e^{h\D}$ can be written as a
+ series over all multi-indices $\alpha$
+ \begin{equation}\label{eq:e^d}
+  e^{h\D}=\sum\limits_{n=0}^{\infty}\frac{h^n}{n!}\sum_{\forall_{i,\alpha}}\frac{\partial^n}{\partial
+        x_{\alpha_1}\ldots \partial x_{\alpha_n}}\e_i\otimes
+      dx_{\alpha_1}\otimes\ldots \otimes dx_{\alpha_n}.
+ \end{equation}
+The operator $e^{h\D}$ is a mapping between function spaces $\eqref{eq:F_n}$
+ \begin{equation*}
+  e^{h\D}:\dP\to\dP_\infty.
+ \end{equation*}
+ It also defines a map
+  \begin{equation}\label{eq:specProg}
+    e^{h\D}:\dP\times \VV\to \VV\otimes \T(\VV^*),
+  \end{equation}
+by taking the image of the map $e^{h\D}(P)$ at a certain point $\vv\in \VV$.  
+We may construct a map from the space of programs,
+to the space of polynomials using  $\eqref{eq:specProg}$. Note that the space of
+multivariate polynomials 
+$\VV\to K$ is isomorphic to symmetric algebra $S(\VV^*)$, which is in turn a
+quotient of tensor algebra $T(\VV^*)$.
+To any element of
+ $\VV\otimes T(\VV^*)$ one can attach corresponding element of $\VV\otimes S(\VV^*)$
+ namely a polynomial map  $\VV\to \VV$. Thus, similarly to \eqref{eq:P_algebra}, we consider the completion of the symmetric algebra $S(\VV^*)$ as the \emph{formal power series} $\Ss(\VV^{*})$, which is in turn isomorphic to a quotient of \emph{tensor series algebra} $\T(\VV^*)$. This leads to 
+ \begin{equation}\label{eq:pToPol}
+  e^{h\D}: \dP\times \VV\to \VV\otimes \Ss(\VV^*)
+ \end{equation}
+ For any element $\vv_0\in \VV$, the expression $e^{h\D}(\cdot,\vv_0)$ is a map $\dP\to
+ \VV\otimes \Ss(\VV^*)$, mapping a program to a formal power series.
+
+ We can express the
+ correspondence between multi-tensors in $\VV\otimes T(\VV^*)$ and polynomial maps
+ $\VV\to \VV$ given by multiple contractions for all possible indices. For a simple tensor $\uu\otimes
+ f_1\otimes\ldots\otimes f_n\in \VV\otimes(\VV^*)^{\otimes n}$ the contraction by
+ $\vv\in \VV$ is given by applying co-vector $f_n$ to $\vv$ \footnote{For order
+   two tensors from $\VV\otimes\VV^*$ the contraction corresponds to
+matrix vector multiplication.}
+ \begin{equation}
+   \label{eq:contraction}
+ \uu\otimes f_1\otimes\ldots\otimes f_n\cdot \vv = f_n(\vv) \uu\otimes f_1\otimes\ldots f_{n-1}.
+\end{equation}
+By taking contraction multiple times, we can attach a monomial map to a
+simple tensor by  
+ \begin{equation}
+   \label{eq:monomial}
+ \uu\otimes f_1\otimes\ldots\otimes f_n\cdot (\vv)^{\otimes n} = f_n(\vv)f_{n-1}(\vv)\cdots f_1(\vv) \uu,
+\end{equation}
+Both contractions \eqref{eq:contraction} and \eqref{eq:monomial} are extended
+by linearity to spaces $\VV\otimes \left(\VV^*\right)^{\otimes n}$ and further
+to $\VV\otimes T(\VV^*)$.\footnote{Note that the simple order one tensor
+  $\uu\in\VV$ can not be contracted by the vector $\vv$. To be consistent we
+  define $\uu\cdot \vv = \uu$ and attach a constant map
+  $\vv\mapsto \uu$ to order zero tensor $\uu$. The extension of
+  \eqref{eq:monomial}
+  to $\VV\otimes T(\VV^*)$ can be seen as a generalization of the affine map,
+  where the zero order tensors account for translation.}
+For a multi-tensor $\bfW=\bfw_0+\bfw_1+\ldots+\bfw_n\in\VV\otimes T_n(\VV^*)$,
+where $\bfw_k\in\VV\otimes\left( \VV^*\right)^{\otimes k}$, applying the
+contraction by a vector $\vv\in \VV$ multiple times yields a polynomial map
+\begin{equation}
+  \label{eq:polynomial_tensor}
+  \bfW(\vv) = \bfw_0+\bfw_1\cdot \vv+\ldots+\bfw_n\cdot (\vv)^{\otimes n}.
+\end{equation}
+\begin{theorem}\label{izr:e^d}
+  For a program $P\in\dP$  the expansion into an infinite tensor series
+  at the point $\vv_0\in \VV$ is expressed by multiple contractions 
+  \begin{multline}\label{eq:tenzorVrsta}
+  P(\vv_0+h\vv) = \Big((e^{h\D}P)(\vv_0)\Big)(\vv)
+  = \sum_{n=0}^\infty\frac{h^n}{n!}\D^nP(\vv_0)\cdot (\vv^{\otimes n})\\
+  = \sum_{n=0}^\infty \frac{h^n}{n!}\sum_{\forall_{i,\alpha}}\frac{\partial^nP_i}{\partial
+        x_{\alpha_1}\ldots \partial x_{\alpha_n}}\e_i\cdot
+      dx_{\alpha_1}(\vv)\cdot\ldots \cdot dx_{\alpha_n}(\vv).
+  \end{multline}
+\end{theorem}
+ 
+ \begin{proof}
+We will show that $\frac{d^n}{dh^n}\text{(LHS)}|_{h=0}=\frac{d^n}{dh^n}\text{(RHS)}|_{h=0}$. Then $\text{LHS}$ and $\text{RHS}$ as functions
+of $h$ have coinciding Taylor series and are therefore equal.\\
+ $\implies$
+ 
+ $$\left. \frac{d^n}{dh^n}P(\vv_0+h\vv)\right|_{h=0}=\D^n P(\vv_0)(\vv)$$
+ $\impliedby$
+ $$\left. \frac{d^n}{dh^n}\left((e^{h\D})(P)(\vv_0)\right)(\vv)\right|_{h=0}=
+\left. \left((\D^n e^{h\D})(P)(\vv_0)\right)(\vv)\right|_{h=0}$$
+ $$\land$$
+ $$\left. \D^ne^{h\D}\right| _{h=0}=\left. \sum\limits_{i=0}^{\infty}\frac{h^i\D^{i+n}}{i!}\right|_{h=0}=\D^n$$
+ $$\implies$$
+ $$\left(\D^n(P)(\vv_0)\right)\cdot(\vv^{\otimes n})$$
+ \end{proof}
+ \begin{remark}\label{konvVrst}
+ Theorem \ref{izr:e^d} can be generalized to convolutions using the Volterra series \cite{volterra}.
+ \end{remark}
+It follows trivially from the above theorem that the operator $e^{h\D}$ is an
+automorphism of the programming algebra $\dP_\infty$, 
+\begin{equation}\label{eq:prod}
+  e^{h\D}(p_1\cdot p_2)=e^{h\D}(p_1)\cdot e^{h\D}(p_2)
+ \end{equation}
+ where $\cdot$ stands for any bilinear map.
+
+ \begin{remark}[Generalized shift operator]\label{rmrk:genShift}
+ The operator $e^{h\D}:\dP\times \VV\to \VV\otimes \T(\VV^*)$ evaluated at $h=1$
+ is a broad generalization of the shift operator \cite{OpCalc}.
+% The theory presented in this section offers more than a mere shift, which will become apparent in the coming sections.
+ \end{remark}
+ 
+ For a specific $\vv_0\in\VV$, the generalized shift operator is denoted by
+ \begin{equation*}
+ e^\D\vert_{\vv_0}:\dP\to \VV\otimes \T(\VV^*)
+ \end{equation*}
+ When the choice of $\vv_0\in\VV$ is arbitrary, we omit it from expressions for brevity.
+
+%  \begin{remark}
+%  Independence of the operator $(\ref{eq:specProg})$ from a coordinate
+%  system, translates to independence in execution. Thus the expression
+%  $(\ref{eq:tenzorVrsta})$ is invariant to the point in execution of a program, a
+%  fact we explore in Section \ref{sec:control}.   
+% \end{remark}
+
+%This part should be somehow included in the begining, how we will write operators that serve our purpose
+%  \begin{remark}
+%  Corollary $\ref{izr:P_n}$ through \eqref{eq:P_algebra} implies
+%         $e^{h\D}(\dP_0)\subset\dP_0\otimes \T(\VV^*)$      
+%  which enables efficient implementation by operator $\sumd$. 
+% \end{remark}
+
+
+%Implement U combinator via this
+
+\subsection{Operator of Program Composition}\label{sec:compsition}
+
+In this section we implement the operator of program composition within the constructed algebraic language. Such a \emph{composer} can than be used to implement the analog of the \emph{U combinator} (which facilitates recursion) and other constructs. Furthermore, due to the differentiable nature of the employed objects, such a \emph{composer} generalizes both forward (e.g. \cite{PcAD}) and reverse (e.g. \cite{ReverseAD}) mode of
+ automatic differentiation of arbitrary order, unified under a single operator. We will than demonstrate how to perform calculations on the operator level, before they are applied to a particular programming space, which serves as an added level of abstraction.
+ 
+ \begin{theorem}[Program composition]\label{izr:kompo}
+ Composition of maps $\dP$ is expressed as
+ \begin{equation}\label{eq:kompo}
+ e^{h\D}(f\circ g)=\exp(\D_fe^{h\D_g})(g,f)
+ \end{equation}
+ where $\exp(\D_fe^{h\D_g}):\dP\times\dP\to\dP_\infty$ is an operator on pairs
+ of maps $(g,f)$, where $\D_g$ is differentiation operator applied to the first
+ component $g$, and $\D_f$ to the second component $f$. 
+ \end{theorem}
+ 
+\begin{proof}
+  We will show that $\frac{d^n}{dh^n}\text{(LHS)}|_{h=0}=\frac{d^n}{dh^n}\text{(RHS)}|_{h=0}$. Then $\text{LHS}$ and $\text{RHS}$ as functions
+  of $h$ have coinciding Taylor series and are therefore equal.\\
+ $\implies$
+ $$\lim\limits_{\lVert h\rVert\to 0}(\frac{d}{dh})^ne^\D(f\circ g)=\lim\limits_{\lVert h\rVert\to 0}\D^ne^{h\D}(f\circ g)$$
+ $$\implies$$
+ \begin{equation}\label{eq:kompproof1}
+ \D^n(f\circ g)
+ \end{equation}
+ 
+ $\impliedby$
+ $$\exp(\D_fe^{h\D_g})=\exp\left(\D_f\sum\limits_{i=0}^{\infty}\frac{(h\D_g)^i}{i!}\right)=\prod_{i=1}^{\infty}e^{\D_f\frac{(h\D_g)^i}{i!}}\Big(e^{\D_f}\Big)$$
+ $$\implies$$
+ $$\exp(\D_fe^{h\D_g})(g,f)=\sum\limits_{\forall_n}h^n\sum\limits_{\lambda(n)}\prod\limits_{k\cdot l\in\lambda}\Big(\frac{\D_f\D_g^l(g)}{l!}\Big)^k\frac{1}{k!}\Big(\Big(e^{\D_f}\Big)f\Big)$$
+ where $\lambda(n)$ stands for the partitions of $n$. Thus
+ \begin{equation}\label{eq:dComposite}
+ \lim\limits_{\lVert h\rVert\to 0}(\frac{d}{dh})^n\exp(\D_fe^{h\D_g})=\sum\limits_{\lambda(n)}n!\prod\limits_{k\cdot l\in\lambda}\Big(\frac{\D_f\D_g^l(g)}{l!}\Big)^k\frac{1}{k!}\Big(\Big(e^{\D_f}\Big)f\Big)
+ \end{equation}
+ taking into consideration the fact that $e^{\D_f}(f)$ evaluated at a point $\vv\in \VV$ is the same as evaluating $f$ at $\vv$, the expression \eqref{eq:dComposite} equals \eqref{eq:kompproof1} by Faà di Bruno's formula.
+   \begin{equation}\label{eq:dCompositePoint}
+   \lim\limits_{\lVert h\rVert\to 0}(\frac{d}{dh})^n\exp(\D_fe^{h\D_g})=\sum\limits_{\lambda(n)}n!\prod\limits_{k\cdot l\in\lambda}\Big(\frac{\D_f\D_g^l(g(v))}{l!}\Big)^k\frac{1}{k!}\Big(f(g(\vv))\Big)
+   \end{equation}
+ \end{proof}       
+ The Theorem $\ref{izr:kompo}$ enables an invariant implementation of the operator of program composition (i.e. the \emph{composer}) in $\dP_n$, expressed as a tensor series through $\eqref{eq:kompo}$ and $\eqref{eq:dComposite}$. 
+ 
+  By fixing the second map $g$ in  
+  \begin{equation}\label{eq:opGenKompo}
+ \exp(\D_fe^{h\D_g}): \dP\times\dP\to\dP_\infty,
+  \end{equation}
+  the operator
+  \begin{equation}
+   \exp(\D_fe^{h\D_g})(\cdot,g)=g^*\left( e^{h\D} \right)\label{eq:opKompo}
+ \end{equation}
+  is the pullback through $g$ of the generalized shift
+  operator $e^{h\D}$. While by
+  fixing the first map $f$ in \eqref{eq:opGenKompo}, the operator
+  \begin{equation}
+ \exp(\D_fe^{h\D_g})(f,\cdot)=f_*\left( e^{h\D} \right)\label{eq:opKompoForward}
+ \end{equation} is the
+  push-forward through $f$ of the generalized shift
+  operator $e^{h\D}$.
+This also generalizes the \emph{U combinator} to its forward and backward modes, by restring the \emph{composers} \eqref{eq:opGenKompo} domain to a single function (i.e. $f$ and $g$ are the same mapping).
+ 
+  \begin{remark}[Unified AD]\label{trd:reverseForward}
+  Because of \eqref{eq:induced_map} and \eqref{eq:program_derivative} every program can be seen as $P=P_n\circ\ldots P_1$. Thus applying the operators
+  $\exp(\D_fe^{h\D_g})(\cdot,P_i)$ from $i=1$ to $i=n$ and projecting onto the space
+  spanned by $\{1,\D\}$ is equivalent to forward mode automatic differentiation,
+  while applying the 
+  operators $\exp(\D_fe^{h\D_g})(P_{n-i+1},\cdot)$ in reverse order (and
+  projecting) is equivalent to reverse mode automatic differentiation.
+ \end{remark}
+ 
+ %  \begin{remark}
+ %  The operator \eqref{eq:kompo} can be generalized for the notion of a pullback
+ %  to arbitrary operators. 
+ %  \end{remark}
+ 
+ % Thus, through $\eqref{eq:kompo}$ and all its' descendants (exponents), the
+ % operator $(\ref{eq:opKompo})$ grants invariance to the point in execution of a
+ % program, which is important when proving algorithm's correctness. This is
+ % analogous to the principle of general covariance \citep[see
+ % section 7.1 in a book by][]{GeneralCovariance} in general relativity, the invariance of the form of physical laws
+ % under arbitrary differentiable coordinate transformations.
+
+   \begin{corollary}\label{izr:komp_homo}
+   The operator $e^{h\D}$ commutes with composition over $\dP$
+   \begin{equation*}
+   e^{h\D}(p_2\circ p_1)=e^{h\D}(p_2)\circ e^{h\D}(p_1)
+   \end{equation*}
+   \end{corollary}
+   
+   \begin{proof}
+   Follows from $\eqref{eq:pToPol}$ and Theorem $\ref{izr:kompo}$.
+   \end{proof}
+
+Such calculations can be made easier, by completing them on
+the level of operators, thus avoiding the need to manipulate tensor series. This serves as a level of abstraction.
+
+The derivative $\frac{d}{dh}$ of $\eqref{eq:opKompo}$ is 
+ \begin{equation}\label{eq:dexp}
+ \frac{d}{dh}\exp(\D_fe^{h\D_g})(g)=\D_f(\D_gg)e^{h\D_g}\exp(\D_fe^{h\D_g})(g)
+ \end{equation}
+ 
+ We note an important distinction to the operator $e^{h\D_g}$, the derivative of which is
+ \begin{equation}\label{eq:de}
+\frac{d}{dh}e^{h\D_g}=\D_ge^{h\D_g}
+ \end{equation}
+ We may now compute derivatives (of arbitrary order) of the \emph{composer} itself.
+
+
 
 
 \printbibliography
