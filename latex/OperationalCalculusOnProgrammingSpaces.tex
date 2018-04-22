@@ -5,6 +5,13 @@
 \begin{document}
 
 \maketitle
+ \begin{abstract}
+In this work we develop an algebraic language that represents a formal calculus for deep learning and is, at the same time a model which enables implementations and investigations of programs.
+
+To this purpose, we develop an \emph{abstract computational model of automatically differentiable programs}. In the model, programs are elements of op.\,cit. \emph{programming spaces}. Programs are viewed as maps from a finite-dimensional vector space to itself op.\,cit. \emph{virtual memory space}. Virtual memory space is an algebra of programs, \emph{an algebraic data structure} (one can calculate with). The elements of the virtual memory space give the expansion of a program into an infinite tensor series. We define a \emph{differential operator} on programming spaces and, using its powers, implement the \emph{general shift operator} and the \emph{operator of program composition}.
+
+TODO: last paragraph
+ \end{abstract}
 
 \section{Introduction}
 
@@ -24,6 +31,8 @@ TODO: Finish the introduction, notes in the .tex
 
 %first we will build a tensor machine, its like building a language
 %than we will "code" the needed operators inside the language, like bootstraping a compiler in OpCalOnProgSpac
+
+%Take a functional description of programs and extend it with tensor-calculus treatment of the memory (as this makes paralelizable)
 
 %such algebraic languages where the same language can be used to implement and study the implemented procedure
 %in machine learning where structures are mathematical this seems very important
@@ -734,30 +743,30 @@ Thus, by corollary \ref{cor:extraxtDerivatives}, the ability of writing differen
   influence values of variables, but change the execution tree of the program. This is why
   we interpret control structures as a piecewise-definition of a map.
  Each control structure divides the space of parameters into different domains, in which the execution of the program is always the same. The entire program divides the space of all possible parameters to a finite set of domains $\{\Omega_i;\quad i=1,\ldots
-  k\}$, where the programs' execution is always the same. As such, a program may in general be piecewise-defined. For $\vec{x}\in\VV$
+  k\}$, where the programs' execution is always the same. As such, a program may in general be piecewise-defined. For $\vv\in\VV$
  \begin{equation}
    \label{eq:zlrprk_splosno}
-   P(\vec{x}) =
+   P(\vv) =
    \left\{\!\begin{matrix}
-     P_{n_11}\circ P_{(n_1-1)1}\circ\ldots P_{11}(\vec{x});&\quad \vec{x}\in\Omega_1\\
-     P_{n_22}\circ P_{(n_2-1)2}\circ\ldots P_{12}(\vec{x});&\quad \vec{x}\in\Omega_2\\
+     P_{n_11}\circ P_{(n_1-1)1}\circ\cdots P_{11}(\vv);&\quad \vv\in\Omega_1\\
+     P_{n_22}\circ P_{(n_2-1)2}\circ\cdots P_{12}(\vv);&\quad \vv\in\Omega_2\\
      \vdots&\quad\vdots\\
-     P_{n_kk}\circ P_{(n_k-1)k}\circ\ldots P_{1k}(\vec{x});&\quad \vec{x}\in\Omega_k\\
+     P_{n_kk}\circ P_{(n_k-1)k}\circ\cdots P_{1k}(\vv);&\quad \vv\in\Omega_k\\
    \end{matrix}\right.
  \end{equation}
- The operator $e^\D$ (at some point) of a program $P$, is of course dependent on initial parameters $\vec{x}$, and can also be expressed piecewise inside domains $\Omega_i$
+ The operator $e^\D$ (at some point) of a program $P$, is of course dependent on initial parameters $\vv$, and can also be expressed piecewise inside domains $\Omega_i$
 
 
 
 
  \begin{equation}
    \label{eq:Dzlrprk_splosno}
-   e^\D P({\vec{x}}) =
+   e^\D P({\vv}) =
    \left\{\!\begin{matrix}
-     e^\D P_{n_11}\circ e^\D P_{(n_1-1)1}\circ\ldots\circ e^\D P_{11}(\vec{x});&\quad \vec{x}\in\interior(\Omega_1)\\
-     e^\D P_{n_22}\circ e^\D P_{(n_2-1)2}\circ\ldots\circ e^\D P_{12}(\vec{x});&\quad \vec{x}\in\interior(\Omega_2)\\
+     e^\D P_{n_11}\circ e^\D P_{(n_1-1)1}\circ\cdots e^\D P_{11}(\vv);&\quad \vv\in\interior(\Omega_1)\\
+     e^\D P_{n_22}\circ e^\D P_{(n_2-1)2}\circ\cdots e^\D P_{12}(\vv);&\quad \vv\in\interior(\Omega_2)\\
      \vdots&\quad\vdots\\
-     e^\D P_{n_kk}\circ e^\D P_{(n_k-1)k}\circ\ldots\circ e^\D P_{1k}(\vec{x});&\quad \vec{x}\in\interior(\Omega_k)\\
+     e^\D P_{n_kk}\circ e^\D P_{(n_k-1)k}\circ\cdots e^\D P_{1k}(\vv);&\quad \vv\in\interior(\Omega_k)\\
    \end{matrix}\right.
  \end{equation}
 
