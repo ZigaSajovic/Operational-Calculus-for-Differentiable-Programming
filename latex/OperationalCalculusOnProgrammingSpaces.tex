@@ -721,6 +721,176 @@ By Theorem \ref{izr:reductionMap}, $n$-differentiable $k$-th derivatives of a pr
 
 Thus, by corollary \ref{cor:extraxtDerivatives}, the ability of writing differentiable programs that act on derivatives of other programs in well defined within the language. This is a crucial feature, as stressed by other authors \cite{AD1,AD2}. Please note that in order to use $k$-th derivative of $P_2$ in an $n$-differentiable program $P_1$, then $P_2$ must have been $(k+n)$-differentiable before $\phi^k$ was applied to it.
 
+%----------------------------------------
+%----------------------------------------
+%----------------------------------------
+%----------------------------------------
+%----------------------------------------
+
+\subsection{Control Structures}\label{sec:control}
+ 
+ Until now, we restricted ourselves to operations, that change the memories' content. Along side assignment statements, we know control statements (ex. statements \texttt{if},
+  \texttt{for}, \texttt{while}, ...). Control statements don't directly
+  influence values of variables, but change the execution tree of the program. This is why
+  we interpret control structures as a piecewise-definition of a map.
+ Each control structure divides the space of parameters into different domains, in which the execution of the program is always the same. The entire program divides the space of all possible parameters to a finite set of domains $\{\Omega_i;\quad i=1,\ldots
+  k\}$, where the programs' execution is always the same. As such, a program may in general be piecewise-defined. For $\vec{x}\in\VV$
+ \begin{equation}
+   \label{eq:zlrprk_splosno}
+   P(\vec{x}) =
+   \begin{cases}
+     P_{n_11}\circ P_{(n_1-1)1}\circ\ldots P_{11}(\vec{x});&\quad \vec{x}\in\Omega_1\\
+     P_{n_22}\circ P_{(n_2-1)2}\circ\ldots P_{12}(\vec{x});&\quad \vec{x}\in\Omega_2\\
+     \vdots&\quad\vdots\\
+     P_{n_kk}\circ P_{(n_k-1)k}\circ\ldots P_{1k}(\vec{x});&\quad \vec{x}\in\Omega_k\\
+   \end{cases}
+ \end{equation}
+ The operator $e^\D$ (at some point) of a program $P$, is of course dependent on initial parameters $\vec{x}$, and can also be expressed piecewise inside domains $\Omega_i$
+ \begin{equation}
+   \label{eq:Dzlrprk_splosno}
+   e^\D P({\vec{x}}) =
+   \begin{cases}
+     e^\D P_{n_11}\circ e^\D P_{(n_1-1)1}\circ\ldots\circ e^\D P_{11}(\vec{x});&\quad \vec{x}\in\interior(\Omega_1)\\
+     e^\D P_{n_22}\circ e^\D P_{(n_2-1)2}\circ\ldots\circ e^\D P_{12}(\vec{x});&\quad \vec{x}\in\interior(\Omega_2)\\
+     \vdots&\quad\vdots\\
+     e^\D P_{n_kk}\circ e^\D P_{(n_k-1)k}\circ\ldots\circ e^\D P_{1k}(\vec{x});&\quad \vec{x}\in\interior(\Omega_k)\\
+   \end{cases}
+ \end{equation}
+
+ \begin{theorem}\label{izr:diferentiableOnDomain}
+ Each program $P\in\dP$ containing control structures is infinitely-differentiable on the domain $\Omega=\bigcup\limits_{\forall_i}\interior(\Omega_i)$.
+ \end{theorem}
+ \begin{proof}
+  Interior of each domain $\Omega_i$ is open. As the entire domain $\Omega=\bigcup\limits_{\forall_i}\interior(\Omega_i)$ is a union of open sets, it is therefore open itself. Thus, all evaluations are computed on some open set, effectively removing boundaries, where problems might have otherwise occurred. Theorem follows directly from the proof of Theorem $\ref{izr:P}$ through argument $\eqref{eq:inductionStep}$.
+ \end{proof}
+ 
+
+Branching of programs into domains $\eqref{eq:zlrprk_splosno}$ is done through conditional statements. Each conditional causes a doubling of possible paths.
+
+\begin{proposition}\label{izr:st.zlepkov}
+Cardinality of the set of domains $\Omega=\{\Omega_i\}$ equals $\lvert\{\Omega_i
+\}\rvert=2^k$, where $k$ is the number of branching point within the program.
+\end{proposition}
+
+This section concerns itself with employing the derived theorems to propose a treatment of branchings that is \emph{linear in its complexity} and avoids the exponential threat of Proposition \ref{izr:st.zlepkov}.
+
+\begin{theorem}\label{izr:2n+1}
+A program $P\in\dP$ can be equivalently represented with at most $2n+1$
+applications of the operator $e^\D$, on $2n+1$ analytic programs, where
+$n$ is the number of branching points within the program.
+\end{theorem}
+
+\tikzstyle{decision} = [diamond, draw, fill=black!5, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=black!5, 
+    text width=5.5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=0.5, every node/.style={scale=0.75},node distance = 2cm, auto]
+    \node [block] (p1) {$P_1$};
+    \node [block,right of=p1,node distance=5cm] (ep1) {$e^\D(P_1)$};
+    \node [block,right of=ep1,node distance=5cm] (tep1) {$T_{F\X}\cdot e^\D(P_1)$};
+    
+    \node [decision, below of=ep1,node distance=3cm] (v1) {\small{Branching}};
+    
+    \node [block,below of=v1,node distance=2.75cm] (ep2) {$e^\D(P_2)$};
+    \node [block,left of=ep2,node distance=3.5cm] (p2) {$P_2$};
+    \node [block,right of=ep2,node distance=3.5cm] (tep2) {$T_{F\X}\cdot e^\D(P_2)$};
+    
+    
+    \node [block,below of=ep2,node distance=2.75cm] (ep3) {$e^\D(P_3)$};
+    \node [block,left of=ep3,node distance=5cm] (p3) {$P_3$};
+    \node [block,right of=ep3,node distance=5cm] (tep3) {$T_{F\X}\cdot e^\D(P_3)$};
+    
+    \path [line,dashed] (p1) -- node{$e^\D$}(ep1);
+    \path [line,dashed] (p2) -- node{$e^\D$}(ep2);
+    \path [line,dashed] (p3) -- node{$e^\D$}(ep3);
+   
+    \path [line,dashed] (ep1) -- node{$T_{F\X}$}(tep1);
+    \path [line,dashed] (ep2) -- node{$T_{F\X}$}(tep2);
+    \path [line,dashed] (ep3) -- node{$T_{F\X}$}(tep3);
+    
+  \coordinate [below of=ep2,node distance=1.5cm](C);
+  \coordinate [right of=C,node distance=5.25cm](D);
+  \coordinate [right of=v1,node distance=5.25cm](E);
+  \coordinate [above of=E,node distance=1.5cm](F);
+  \coordinate [above of=v1,node distance=1.5cm](G);
+  \path[line](C)--(D)--(E)--(F)--(G);
+  
+  \coordinate [above of=ep2,node distance=1.5cm](C2);
+  \coordinate [above of=p2,node distance=1.5cm](D2);
+  \coordinate [above of=tep2,node distance=1.5cm](E2);
+  \path[line](v1)--(ep2);
+  \path[line] (C2)--(D2)--(p2);
+  \path[line] (C2)--(E2)--(tep2);
+  
+  \coordinate [above of=ep3,node distance=1cm](D3);
+  \coordinate [below of=ep2,node distance=1cm](C3);
+  \coordinate [below of=p2,node distance=1cm](D3);
+  \coordinate [below of=tep2,node distance=1cm](E3);
+  \coordinate [below of=C,node distance=0.25cm](CC3);
+  \draw (p2)--(D3)--(E3)--(tep2);
+  \draw (ep2)--(C);
+  
+  \coordinate [below of=ep1,node distance=1cm](C4);
+  \coordinate [below of=p1,node distance=1cm](D4);
+  \coordinate [below of=tep1,node distance=1cm](E4);
+  \draw (p1)--(D4)--(C4);
+  \draw (tep1)--(E4)--(C4);
+  \path[line](ep1)--(v1);
+  
+  \coordinate [above of=p3,node distance=1.25cm](C5);
+  \coordinate [above of=ep3,node distance=1.25cm](D5);
+  \coordinate [above of=tep3,node distance=1.25cm](E5);
+
+  
+  \coordinate [left of=p3,node distance=1.75cm](D2);
+  \coordinate [left of=v1,node distance=6.75cm](F2);
+  \coordinate [below of=D2,node distance=1.25cm](H2);
+  \coordinate [below of=p3,node distance=1.25cm](I2);
+  \coordinate [below of=ep3,node distance=1.25cm](J2);
+  \coordinate [below of=tep3,node distance=1.25cm](K2);
+  
+  \path[line](v1)--(F2)--(D2)--(H2)--(I2)--(p3);
+  \path[line](I2)--(J2)--(ep3);
+  \path[line](J2)--(K2)--(tep3);
+  
+\end{tikzpicture}
+\caption{Transformation diagram} \label{fig:diagram}
+\end{center}
+\end{figure}
+
+
+\begin{proof}
+  Source code of a program $P\in\dP$ can be represented by a directed graph, as shown in Figure $\ref{fig:diagram}$. Each branching causes a split in the execution tree, that after completion returns to the splitting point.
+  By Theorem $\ref{izr:kompo}$, each of these branches can be viewed as a program $p_i$, for which it holds $$e^\D(p_n\circ p_{n-1}\circ\cdots\circ p_1)=e^\D(p_n)\circ e^\D(p_{n-1})\circ\cdots\circ e^\D(p_1)$$ by Theorem $\ref{izr:kompo}$.
+  
+  Thus, the source code contains $2n$ differentiable branches, from its' first branching on, not counting the branch leading up to it, upon which the application of the operator $e^\D$ is needed. Total of $2n+1$. By Theorem $\ref{izr:P}$, each of these branches is analytic.
+\end{proof}
+
+
+% \begin{remark}\label{trd:composeOperators}
+% Images of the operator $e^\D$ and $T_{F\X}$  are elements of the original space $\dP$, which may be composed. Thus for $P=p_3\circ p_2\circ p_1$, the following makes sense
+% \begin{equation*}
+% P=\Big(p_3\circ e^ \D(p_2)\circ T_{F\X}e^\D(p_1)\Big) \in \dP
+% \end{equation*}
+
+% The same holds true for all permutations of applications of operators $e^\D$, $T_{F\X}$ and $id$, as visible in Figure $\ref{fig:diagram}$.
+% \end{remark}
+
+% \begin{remark}
+% In practice, we always use projections of the operator $e^\D$ to some finite order $n$, resulting in $e^\D_n$. Therefore, we must take note that the following relation holds
+% \begin{equation*}
+% e^\D_m(P_2)\circ e^\D_n(P_1)=e^\D_k(P_2\circ P_1)\iff 0\le k\le \min(m,n)
+% \end{equation*}
+% when composing two images of the applied operator, projected to different subspaces.
+% \end{remark}
+
+
+
 \printbibliography
 
 \end{document}
