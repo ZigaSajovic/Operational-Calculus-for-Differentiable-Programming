@@ -738,23 +738,27 @@ Thus, by corollary \ref{cor:extraxtDerivatives}, the ability of writing differen
  \begin{equation}
    \label{eq:zlrprk_splosno}
    P(\vec{x}) =
-   \begin{cases}
+   \left\{\!\begin{matrix}
      P_{n_11}\circ P_{(n_1-1)1}\circ\ldots P_{11}(\vec{x});&\quad \vec{x}\in\Omega_1\\
      P_{n_22}\circ P_{(n_2-1)2}\circ\ldots P_{12}(\vec{x});&\quad \vec{x}\in\Omega_2\\
      \vdots&\quad\vdots\\
      P_{n_kk}\circ P_{(n_k-1)k}\circ\ldots P_{1k}(\vec{x});&\quad \vec{x}\in\Omega_k\\
-   \end{cases}
+   \end{matrix}\right.
  \end{equation}
  The operator $e^\D$ (at some point) of a program $P$, is of course dependent on initial parameters $\vec{x}$, and can also be expressed piecewise inside domains $\Omega_i$
+
+
+
+
  \begin{equation}
    \label{eq:Dzlrprk_splosno}
    e^\D P({\vec{x}}) =
-   \begin{cases}
+   \left\{\!\begin{matrix}
      e^\D P_{n_11}\circ e^\D P_{(n_1-1)1}\circ\ldots\circ e^\D P_{11}(\vec{x});&\quad \vec{x}\in\interior(\Omega_1)\\
      e^\D P_{n_22}\circ e^\D P_{(n_2-1)2}\circ\ldots\circ e^\D P_{12}(\vec{x});&\quad \vec{x}\in\interior(\Omega_2)\\
      \vdots&\quad\vdots\\
      e^\D P_{n_kk}\circ e^\D P_{(n_k-1)k}\circ\ldots\circ e^\D P_{1k}(\vec{x});&\quad \vec{x}\in\interior(\Omega_k)\\
-   \end{cases}
+   \end{matrix}\right.
  \end{equation}
 
  \begin{theorem}\label{izr:diferentiableOnDomain}
@@ -884,7 +888,7 @@ $n$ is the number of branching points within the program.
 % \begin{remark}
 % In practice, we always use projections of the operator $e^\D$ to some finite order $n$, resulting in $e^\D_n$. Therefore, we must take note that the following relation holds
 % \begin{equation*}
-% e^\D_m(P_2)\circ e^\D_n(P_1)=e^\D_k(P_2\circ P_1)\iff 0\le k\le \min(m,n)
+% e^\D_m(P_2)\circ e^\D_n(P_1)\defeq e^\D_k(P_2\circ P_1)\iff 0\le k\le \min(m,n)
 % \end{equation*}
 % when composing two images of the applied operator, projected to different subspaces.
 % \end{remark}
