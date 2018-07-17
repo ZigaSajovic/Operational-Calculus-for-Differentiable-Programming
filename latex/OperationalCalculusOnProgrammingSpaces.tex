@@ -6,19 +6,32 @@
 
 \maketitle
  \begin{abstract}
-In this work we develop an algebraic language that represents a formal calculus for deep learning and is, at the same time a model which enables implementations and investigations of programs.
+   In this work we present a theoretical model for differentiable programming. We present an algebraic language that enables both implementations and analysis of differentiable programs (of arbitrary order of differentition).
 
-To this purpose, we develop an \emph{abstract computational model of automatically differentiable programs}. In the model, programs are elements of op.\,cit. \emph{programming spaces}. Programs are viewed as maps from a finite-dimensional vector space to itself op.\,cit. \emph{virtual memory space}. Virtual memory space is an algebra of programs, \emph{an algebraic data structure} (one can calculate with). The elements of the virtual memory space give the expansion of a program into an infinite tensor series. We define a \emph{differential operator} on programming spaces and, using its powers, implement the \emph{general shift operator} and the \emph{operator of program composition}.
-
-TODO: last paragraph
+To this purpose, we develop an \emph{abstract computational model of automatically differentiable programs} of arbitrary order. In the model, programs are elements of op.\,cit. \emph{programming spaces} and are viewed as maps from a finite-dimensional vector space to itself op.\,cit. \emph{virtual memory space}.
+   Virtual memory space is also an algebra of programs, \emph{an algebraic data structure} one can calculate with.
+   
+We define the \emph{operator of differentiation} ($\D$) on programming spaces and, using its powers, implement the \emph{general shift operator} and the \emph{operator of program composition}.
+We provide the formula for the expansion of a differentiable program into an infinite tensor series in terms of the powers of $\D$. We express the operator of program composition in terms of the generalized shift operator and $\D$, which implements a differntiable composition in the language. We prove that our language enables differentiation of the derivatives of programs by the use of the \emph{order reduction map}.
+   
+The provided higher order constructs are sufficient for the language to be a complete model of differentiable programming. 
  \end{abstract}
 
 \section{Introduction}
 
-Von Neumann languages do not have useful properties for reasoning about programs. Axiomatic and denotational semantics are precise tools for describing and understanding conventional programs, but they only talk about them and cannot alter their ungainly
-properties \cite{backus}. This issue raised by John Backus has partially been addressed by algebraic data types employed by functional programming, where a mapping has been shown between grammars and semirings; for an example of how this algebraic view is used to show an isomorphism between data types, see \cite{7Trees}. Yet due to the lack of inverses (hence the semiring structure) we remain limited in the algebraic manipulations we are allowed to employ; for an explanation via a connection between objects of categories and complex numbers see \cite{complexCat}. This leaves one intrigued, but wanting, as the existence of inverses is what gives algebra its true power -- the ability to solve equations.
+According to John Backus Von Neumann languages do not have useful properties for reasoning about programs. Axiomatic and denotational semantics are precise tools for describing and understanding conventional programs, but they only talk about them and cannot alter their ungainly
+properties \cite{backus}. This issue has partially been addressed by algebraic data types employed by functional programming, where a mapping has been shown between grammars and semirings \cite{7Trees}.
+Yet due to the lack of inverses (hence the semiring structure) we remain limited in the algebraic manipulations we are allowed to employ \cite{complexCat}.
+
+As computer programs are the dominant tool for modern problem solving, the need for examining the analytic properties of programs led to the development of various tools for dealing with derivatives of computer programs (automatic differentiation). Yet the developed techniques are only efficient ways of calculating derivatives, and do not construct any algebraic structure over differentiable programs. As such, there is still a need for a framework that properly captures the analytic properties of differentiable programs. 
+
+The ideas of functional programming and automatic differentiation have been combined to some extent successfully in the field of Deep Learning. As it has shown itself to be more than a collection of machine learning algorithms, the name Differentiable programming emerged as a new programming paradigm. 
+
 
 In recent times, names like \emph{Differentiable Programming} and \emph{Software $2.0$} have attached themselves to Deep learning, as it has shown itself to be more than a collection of machine learning algorithms; it is emerging as a new programming paradigm.
+The ideas of functional programming and automatic differentiation used in Deep learning 
+
+
 But because the field is still in its youth, most of the advances come as a result of empirical investigations.
 Yet, as it is founded on rigorous mathematical objects, it offers an opportunity to be formalized as a language.
 And as it is rooted in tensor algebra, it holds the ability to address the outlined issues, because \emph{unlike von Neumann languages, the language of ordinary algebra is suitable both for stating its laws and for transforming
@@ -26,7 +39,7 @@ an equation into its solution, all within the language} \cite{backus}.
 Furthermore, due of its innate relationship with calculus, a language encompassing it would serve as a formal gateway of analysis into programming.
 
 TODO: Finish the introduction, notes in the .tex
-
+We provide the theoretical model that includes what is today known as Differentiable programming.
 %a language in which basic words are neural networks
 
 %first we will build a tensor machine, its like building a language
@@ -215,7 +228,7 @@ and save all the derivatives of the orders $k$ and less.
 
 \section{Differentiable Programming Spaces}
 
-The memory space of a program is rarely treated as more than a storage. But to endow the \emph{Euclidean machine} with extra structure, this is precisely what to focus on. Loosely speaking, functional programming is described by monoids, as a (multi)linear algebra description of the memory space seems the appropriate step to take in attaining the wanted structure.
+The memory space of a program is rarely treated as more than a storage. But to endow the \emph{Euclidean machine} with extra structure, this is precisely what to focus on. Loosely speaking, functional programming is described by monoids, and as such a (multi)linear algebra description of the memory space seems the appropriate step to take in attaining the wanted structure.
 
 \subsection{Memory space}
 
