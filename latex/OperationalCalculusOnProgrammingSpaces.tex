@@ -25,21 +25,24 @@ Yet due to the lack of inverses (hence the semiring structure) we remain limited
 
 As computer programs are the dominant tool for modern problem solving, the need for examining the analytic properties of programs led to the development of various tools for dealing with derivatives of computer programs (automatic differentiation). Yet the developed techniques are only efficient ways of calculating derivatives, and do not construct any algebraic structure over differentiable programs. As such, there is still a need for a framework that properly captures the analytic properties of differentiable programs. 
 
-The ideas of functional programming and automatic differentiation have been combined to some extent successfully in the field of Deep Learning. As it has shown itself to be more than a collection of machine learning algorithms, the name Differentiable programming emerged as a new programming paradigm. 
+The ideas of functional programming and automatic differentiation have been combined to some extent successfully in the field of Deep Learning for example. % citation needed
+It has shown itself to be more than a collection of machine learning algorithms and the name Differentiable programming emerged as a new programming paradigm. 
 
 
-In recent times, names like \emph{Differentiable Programming} and \emph{Software $2.0$} have attached themselves to Deep learning, as it has shown itself to be more than a collection of machine learning algorithms; it is emerging as a new programming paradigm.
-The ideas of functional programming and automatic differentiation used in Deep learning 
 
-
-But because the field is still in its youth, most of the advances come as a result of empirical investigations.
+But because the field is still in its youth, most of the advances come as a result of empirical investigations.%add defciencies of AD and DL
 Yet, as it is founded on rigorous mathematical objects, it offers an opportunity to be formalized as a language.
-And as it is rooted in tensor algebra, it holds the ability to address the outlined issues, because \emph{unlike von Neumann languages, the language of ordinary algebra is suitable both for stating its laws and for transforming
-an equation into its solution, all within the language} \cite{backus}.
-Furthermore, due of its innate relationship with calculus, a language encompassing it would serve as a formal gateway of analysis into programming.
 
-TODO: Finish the introduction, notes in the .tex
-We provide the theoretical model that includes what is today known as Differentiable programming.
+We have been inspired by the development of differentiable programming to formalize a theoretical model, that encompasses the ideas underlying differentiable programming and provides a more general setting for investigations of differentiable programs. The presented theoretical model enables analytic investigations of differentiable programs through algebraic tools, that are closer to the field of programming; i.e. the presented operators can take the same role as higher order functions in functional programming. We introduce a \emph{Virtual Tensor Machine} as a language that extends functional definition of programs with tensor-calculus treatment of the memory and the program itself. Such a tensor description of the memory is a formalization of recent advancements in high performance computing hardware, ex. tensor processing units by Google and tensor cores by Nvidia. Furthermore the presented model is self-sufficient, as the operational calculus presented herein is implemented strictly within the language itself.
+
+
+Mathematical analysis and calculus found its way into programming, where different fields employ analytic properties of programs. What seems to be lacking in these attempts is a mechanism that would abstract away the gory details of calculus and provide the ability to employ it on a higher level in computer programming. The proposed theoretical model and the constructed operational calculus aims to fill this gap, in the same way as it has done so in the field of physics.
+
+
+%Furthermore, due of its innate relationship with calculus, a language encompassing it would serve as a formal gateway of analysis into programming.
+
+%TODO: Finish the introduction, notes in the .tex
+%We provide the theoretical model that includes what is today known as Differentiable programming.
 %a language in which basic words are neural networks
 
 %first we will build a tensor machine, its like building a language
@@ -917,7 +920,7 @@ $n$ is the number of branching points within the program.
 % when composing two images of the applied operator, projected to different subspaces.
 % \end{remark}
 
-
+\input{../iterators.tex}
 
 \printbibliography
 
