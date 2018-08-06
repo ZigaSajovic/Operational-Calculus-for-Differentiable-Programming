@@ -1,0 +1,31 @@
+\section{Computer Programs as Maps on a Vector Space}
+
+We will model computer programs as maps on a vector space. If
+we only focus on the real valued variables (of type \texttt{float} or
+\texttt{double}), the state of the memory can be seen as a high
+dimensional vector\footnote{We assume the variables of interest to be of type \texttt{float} for
+  simplicity. Theoretically any field can be used instead of $\RR$.}. 
+A set of all the possible states of the program's memory,
+can be modeled by a finite dimensional real vector space $\VV\equiv \RR^n$. We
+will call $\VV$ the \emph{memory space of the program}. The effect of a computer
+program on its memory space $\VV$, can be described by a map
+\begin{equation}
+  \label{eq:map}
+  P:\VV\to \VV.
+\end{equation}
+A programming space is a space of maps $\VV\to\VV$ that can be implemented as a
+program in specific programming language. 
+\begin{definition}[Euclidean machine] The tuple $(\VV,\F)$ is an Euclidean machine, where
+  \begin{itemize}
+  \item
+  $\VV$ is a finite dimensional vector space over a complete field $K$, serving
+  as memory\footnote{In most applications the field $K$ will
+    be $\RR$}
+  \item
+  $\F< \VV^\VV$ is a subspace of the space of maps $\VV\to \VV$, called \emph{programming space}, serving as actions on the memory.
+  \end{itemize}  
+\end{definition}
+
+At first glance, the \emph{Euclidean machine} seems like a description of functional programming, with its compositions inherited from $\F$. An intended impression, as we wish for the \emph{Euclidean machine} to build on its elegance. But note that in the coming section an additional restriction is imposed on $\F$; that of its elements being differentiable.
+
+
