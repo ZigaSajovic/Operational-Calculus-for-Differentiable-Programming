@@ -1,0 +1,142 @@
+\section{Differentiable Maps and Programs}
+
+To define differentiable programs, let us first recall some
+definitions from multivariate calculus.
+\begin{definition}[Derivative]
+  Let $V,U$ be Banach spaces. A map $P:V\to U$ is differentiable at a point
+  $\x\in V$, if there exists a linear bounded operator $TP_\x:V\to U$ such that
+  \begin{equation}
+    \label{eq:frechet}
+    \lim_{\h\to 0}\frac{\|P(\x+\h)-P(\x)-TP_\x(\h)\|}{\|\h\|} = 0.
+  \end{equation}
+  The map $TP_\x$ is called the \emph{Fréchet derivative} of the map $P$ at the
+  point $\x$.
+\end{definition}
+For maps $\RR^n\to \RR^m$ Fréchet derivative can be expressed by multiplication
+of vector $\h$ by the Jacobi matrix $\mathbf{J}_{P,\x}$ of partial
+derivatives of the components of the map $P$
+\begin{equation*}
+  T_\x P(\h) = \mathbf{J}_{P,\x}\cdot \h.
+\end{equation*}
+
+We assume for the remainder of this section that the map $P:V\to U$ is
+differentiable for all $\x\in V$. The derivative defines a map from $V$ to
+linear bounded maps from $V$ to $U$. We further assume $U$ and $V$ are finite
+dimensional. Then the space of linear maps from $V$ to $U$ is isomorphic to the
+tensor product $U\otimes V^*$, where the isomorphism is given by the
+tensor contraction, sending a simple tensor $\uu\otimes f\in U\otimes
+V^*$ to a linear map
+ \begin{equation}
+   \label{eq:lin_tenzor}
+   \uu\otimes f:\x \mapsto f(\x)\cdot \uu.
+ \end{equation}
+The derivative defines a map
+\begin{eqnarray}
+  \label{eq:odvod_preslikava}
+  \D P&:& V\to U\otimes V^*\\
+  \D P&:& \x \mapsto T_\x P.
+\end{eqnarray}
+One can consider the differentiability of the derivative itself $\D P$ by
+looking at it as a map \eqref{eq:odvod_preslikava}. This leads to the definition
+of the higher derivatives.
+\begin{definition}[higher derivatives]
+  \label{def:higher_derivatives}
+  Let $P:V\to U$ be a map from vector space $V$ to vector space $U$. 
+The derivative $\D^k P$ of order $k$ of the map $P$ is the map
+\begin{eqnarray}\label{eq:partial}
+    \label{eq:visji_odvod}
+    \D^kP&:&V\to U\otimes (V^*)^{\otimes k}\\
+    \D^kP&:&\x\mapsto T_\x\left( \D^{k-1}P \right)
+  \end{eqnarray}
+\end{definition} 
+\begin{remark}
+  For the sake of clarity, we assumed in the definition above, that the map $P$
+  as well as all its derivatives are differentiable at all points $\x$. If this
+  is not the case, 
+  definitions above can be done locally, which would introduce mostly technical
+  difficulties. 
+\end{remark}
+Let $\e_1,\ldots,\e_n$ be a basis of $U$ and $x_1,\ldots x_m$ the basis of
+$V^*$. Denote by $P_i=x_i\circ P$ the $i-th$ component of the map
+$P$ according to the basis $\{\e_i\}$ of $U$.
+Then $\D^kP$  can be defined in terms of
+directional (partial) derivatives by the formula
+\begin{equation}\label{eq:d}
+  \partial^kP=\sum_{\forall_{i,\alpha}}\frac{\partial^k P_i}{\partial
+      x_{\alpha_1}\ldots \partial x_{\alpha_k}}\e_i\otimes
+    dx_{\alpha_1}\otimes\ldots \otimes dx_{\alpha_k}.
+\end{equation}
+
+\subsection{Differentiable Programs}
+
+We want to be able to represent the derivatives of a computer program in an
+\emph{Euclidean machine} again as a program in the same \emph{Euclidean machine}. We define three subspaces of the virtual memory space $\VV$, that
+describe how different parts of the memory influence the final result of the
+program.   
+
+Denote by $\e_1,\ldots \e_n$ a standard basis of the memory space $\VV$ and by
+$x_1,\ldots x_n$ the dual basis of $\VV^*$. The functions $x_i$ are coordinate
+functions on $\VV$ and correspond to individual locations(variables) in the
+program memory.
+
+\begin{definition}
+  For each program $P$ in the programming space $\F<\VV^\VV$,
+  we define the \emph{input} or \emph{parameter space} $I_P<\VV$ and the
+  \emph{output space} $O_P<\VV$ to be the minimal vector sub-spaces spanned by
+  the standard basis vectors, such that the map $P_e$, defined by the following
+  commutative diagram 
+\begin{equation} 
+    \label{eq:induced_map}
+\begin{tikzcd}
+  \VV \arrow{r}{P} & 
+  \VV \arrow{d}{\mathrm{pr}_{O_P}}\\
+  I_P \arrow[hook]{u}{\vec{i}\mapsto \vec{i}+\vec{f}} 
+  \arrow{r}{P_e}& O_P
+\end{tikzcd}
+  \end{equation}
+does not depend of the choice of the element 
+$\vec{f}\in F_P=(I_P+O_P)^\perp$.
+
+The space $F_P=(I_P+O_P)^\perp$ is called \emph{free space} of the program $P$.
+\end{definition}
+
+The variables $x_i$ corresponding to standard
+basis vectors spanning the parameter, output and free space are called
+\emph{paramters} or \emph{input variables}, \emph{output variables} and
+\emph{free variables} correspondingly. Free variables are those that are
+left intact by the program and have no influence on the final result other than
+their value itself. The output of the program depends only on the values
+of the input variables and consists of variables that have changed during
+the program. Input parameters and output values might overlap. 
+
+The map $P_e$ is called the \emph{effective map} of the program $P$ and
+describes the actual effect of the program $P$ on the memory,
+ignoring the free memory. 
+
+The derivative of the effective map is of interest, when we speak about
+differentiability of computer programs. 
+\begin{definition}[Automatically differentiable programs]
+  \label{def:program_derivative}
+  A program $P:\VV\to \VV$ is \emph{automatically differentiable} if there exist
+  an embedding of the space $O_P\otimes I_P^*$ into the free space $F_P$, and a program $(1+\D P):\VV\to \VV$,
+  such that its effective map is the map
+  \begin{equation}
+    \label{eq:program_derivative}
+    P_e\oplus \D P_e:I_P\rightarrow O_P\oplus (O_P\otimes I^*).
+  \end{equation}
+  A program $P:\VV\to \VV$ is \emph{automatically differentiable of order $k$}
+  if there exist a program $\sumd_k P:\VV\to \VV$,
+  such that its effective map is the map
+  \begin{equation}
+    \label{eq:program_derivative_higher}
+    P_e\oplus \D P_e\oplus \ldots \D^k P_e:I_P\rightarrow O_P\oplus \left(O_P\otimes I^*\right)\oplus\ldots \left( O_P\otimes \left( I_p^*\right)^{k\otimes} \right).
+  \end{equation}
+\end{definition}
+
+If a program $P:\VV\to \VV$ is automatically differentiable then it is also
+differentiable as a map $\VV\to\VV$. However only the derivative of program's
+effective map can be implemented as a program, since the memory space is limited to $\VV$. 
+To be able to differentiate a program to the $k$-th order, we have to calculate
+and save all the derivatives of the orders $k$ and less.
+
+
