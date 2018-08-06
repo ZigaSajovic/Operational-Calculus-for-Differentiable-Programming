@@ -5,7 +5,7 @@ A work in progress
 
 In this work we present a theoretical model for differentiable programming. We present an algebraic language that enables both implementations and analysis of differentiable programs (of arbitrary order of differentition).
 
-To this purpose, we develop an _abstract computational model of automatically differentiable programs_ of arbitrary order. In the model, programs are elements of op.,cit. _programming spaces_ and are viewed as maps from a finite-dimensional vector space to itself op.,cit. _virtual memory space_.
+To this purpose, we develop an _abstract computational model of automatically differentiable programs_ of arbitrary order. In the model, programs are elements of op. cit. _programming spaces_ and are viewed as maps from a finite-dimensional vector space to itself op. cit. _virtual memory space_.
    Virtual memory space is also an algebra of programs, _an algebraic data structure_ one can calculate with.
    
 We define the _operator of differentiation_ (∂) on programming spaces and, using its powers, implement the _general shift operator_ and the _operator of program composition_.
