@@ -42,3 +42,4 @@ for i in range(2):
   compile_latex()
 
 print("DONE.\nCompiled files can be found in %s" % os.path.realpath(pdf_dir))
+exit(0)
