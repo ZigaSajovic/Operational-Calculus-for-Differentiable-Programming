@@ -1,0 +1,161 @@
+\section{Differentiable Programming Spaces}
+
+The memory space of a program is rarely treated as more than a storage. But to endow the \emph{Euclidean machine} with extra structure, this is precisely what to focus on. Loosely speaking, functional programming is described by monoids, and as such a (multi)linear algebra description of the memory space seems the appropriate step to take in attaining the wanted structure.
+
+\subsection{Memory space}
+
+Motivated by the Definition
+\ref{def:program_derivative}, we define
+the \emph{memory space} for differentiable programs  as a sequence of vector spaces with
+the recursive formula
+\begin{eqnarray}
+  \VV_0 &=& \VV\\
+  \label{eq:universal_space}
+  \VV_k &=& \VV_{k-1}+\left(\VV_{k-1}\otimes \VV^*\right).
+\end{eqnarray}
+Note that the sum is not direct, since some of the subspaces of $\VV_{k-1}$ and
+$\VV_{k-1}\otimes \VV^*$ are naturally isomorphic and will be
+identified\footnote{The spaces $\VV\otimes(\VV^*)^{\otimes (j+1)}$ and
+  $\VV\otimes (\VV^*)^{\otimes j}\otimes \VV^*$ are naturally isomorphic and
+  will be identified in the sum.
+}.
+
+  The space that satisfies the recursive formula (\ref{eq:universal_space}) is
+  \begin{equation}
+    \label{eq:k-th-virtual-space}
+    \VV_k = \VV\otimes \left(K\oplus \VV^* \oplus (\VV^*\otimes \VV^*)\oplus\ldots
+      (\VV^*)^{\otimes k}\right) = \VV\otimes T_k(\VV^*),
+  \end{equation}
+  where $T_k(\VV^*)$ is a subspace of \emph{tensor algebra} $T(\VV^*)$, consisting of
+  linear combinations of tensors of rank less or equal $k$. This construction
+  enables us to define all the derivatives as maps with 
+  the same domain and codomain $\VV\to \VV\otimes T(\VV^*)$.
+
+  As such, the memory space is a mapping from-and-to itself,
+\begin{equation}
+\VV_n:\VV\to\VV,
+\end{equation}
+which is, for an arbitrary $\bfW\in\VV_n$, defined as, 
+\begin{equation}
+\bfW(\vv)=\bfw_0+\bfw_1\cdot\vv+\cdots+\bfw_n\cdot(\vv)^{\otimes n}\label{eq:Contraction},
+\end{equation}
+the sum of multiple contractions (where $\bfw_i\in\VV_i$). The expression \eqref{eq:Contraction} will be rigorously defined in section \ref{sec:Vrsta}. With such a construction, the expansions and contractions of the memory space (reminiscent to the breathing of the stack) would hold meaning parallel to storing values; which is what motives the next definition.
+
+\begin{definition}[Virtual memory space]\label{def:VV}
+Let $(\VV,\F)$ be an Euclidean machine and let  
+
+\begin{equation}
+\VV_\infty = \VV\otimes T(\VV^*) = \VV\oplus
+(\VV\otimes\VV^*)\oplus\ldots,\label{eq:virtual-memory}
+\end{equation}
+where $T(\VV^*)$ is the tensor algebra of the dual space $\VV^*$.
+We call $\VV_\infty$ the \emph{virtual memory space} of a \emph{Euclidean machine} $(\VV,\F)$.
+\end{definition}
+The term virtual memory is used as it is only possible to embed certain subspaces of $\VV_\infty$ into memory space $\VV$, making it similar to
+virtual memory as a memory management technique. 
+
+We can extend each program $P:\VV\to \VV$ to the map on
+universal memory space $\VV_\infty$ by setting the first component in the direct sum
+\eqref{eq:virtual-memory} to $P$, and all other components to zero. Similarly
+derivatives $\D^k P$ can be also seen as maps  from $\VV$ to $\VV_\infty$ by
+setting $k$-th component in the direct sum \eqref{eq:virtual-memory} to $\D^k P$
+and all others to zero.
+
+\subsection{Differentiable Programming Spaces}
+
+Let us define the following function spaces:
+ \begin{equation}\label{eq:F_n}
+  \F_n=\{f:\VV\to \VV\otimes T_n(\VV^*)\}
+ \end{equation}
+All of these function spaces can be seen as sub spaces of $\F_\infty=\{f:\VV\to \VV\otimes
+T(\VV^*)\}$, since $\VV$ is naturally embedded into $ \VV\otimes T(\VV^*)$. The
+Fréchet derivative defines an operator on the space of smooth maps in $\F_\infty$\footnote{The operator $\D$ may be defined partially for other maps as
+   well, but we will handle this case later.}. We denote this operator $\D$. The image of any map
+ $P:\VV\to \VV$ by operator $\D$ is its first derivative, while the higher order
+ derivatives are just powers of operator $\D$ applied to $P$.
+ Thus $\D^k$ is a mapping between function spaces $\eqref{eq:F_n}$
+ \begin{equation}\label{eq:toFn+k}
+ \D^k:\F^n\to\F^{n+k}.
+ \end{equation}
+ 
+ 
+ \begin{definition}[Differentiable programming space]\label{def:dP}
+  A \emph{differentiable programming space} $\dP_0$ is any subspace of $\F_0$ such that
+  \begin{equation}\label{eq:P}
+  \D\dP_0\subset\dP_0\otimes T(\VV^*)
+\end{equation}
+The space $\dP_n<\F_n$ spanned by $\{\D^k\dP_0;\quad 0\le k\le n\}$ over $K$, is
+called a differentiable programming space of order $n$. When all elements of
+$\dP_0$ are analytic, we call $\dP_0$ an \emph{analytic programming space}. 
+ \end{definition}
+The definition of higher order differentiable programming spaces is justified by the following theorem. 
+\begin{theorem}[Infinite differentiability]\label{izr:P}
+  Any differentiable programming space $\dP_0$ is an
+  infinitely differentiable programming space, meaning that
+  \begin{equation}\label{eq:P_n}
+      \D^k\dP_0\subset\dP_0\otimes T(\VV^*)
+    \end{equation}
+for any $k\in\mathbb{N}$.
+\end{theorem}
+\begin{proof} By induction on order $k$. For $k=1$ the claim holds by definition. Assume  $\forall_{P\in\dP_0}$,
+  $\D^n\dP_0\subset\dP_0\otimes T(\VV^*)$. Denote by $P_{\alpha,k}^i$ the
+  component of the $k$-th derivative for a multiindex $\alpha$  denoting the
+  component of $T(\VV^*)$ and an index $i$ denoting the component of $\VV$.
+  \begin{equation}\label{eq:inductionStep}
+\D^{n+1}P_{\alpha,k}^i=\D(\D^n P^i_\alpha)_k\land(\D^n P^i_\alpha)\in\dP_0\implies \D(\D^n P^i_\alpha)_k\in \dP_0\otimes T(\VV^*)
+  \end{equation}
+  $$\implies$$
+  $$\D^{n+1}\dP_0\subset\dP_0\otimes T(\VV^*)$$
+Thus by induction, the claim holds for all $k\in \mathbb{N}$. 
+\end{proof}
+
+
+
+ \begin{corollary}\label{izr:P_n}
+  A differentiable programming space of order $n$, $\dP_n:\VV\to \VV\otimes
+  T(\VV^*)$, can be embedded into the tensor 
+  product of the function space $\dP_0$ and the space $T_n(\VV^*)$ of
+  multi-tensors of order less than equal $n$:
+  \begin{equation}
+    \label{eq:D_p_embed}
+    \dP_n<\dP_0\otimes T_n(\VV^*).
+  \end{equation}
+ \end{corollary}
+ 
+By taking the limit as $n\to \infty$, we consider 
+  
+  \begin{equation}
+  \label{eq:P_algebra}
+        \dP_\infty < \dP_0\otimes \T(\VV^*),
+  \end{equation}
+where $\T(\VV^*)=\prod_{k=0}^\infty (\VV^*)^{\otimes k}$ is the \emph{tensor series
+  algebra}, the algebra of the infinite formal tensor series.\footnote{The
+  tensor series algebra is a completion of the tensor algebra $T(\VV^*)$ in suitable topology.}
+
+\subsection{Virtual Tensor Machine}
+
+We propose an abstract computational model, that is capable of constructing differentiable programming spaces. Such a model provides a
+framework for analytic study of programs by algebraic means. 
+
+Following from Theorem \ref{izr:P}, the tuple $(\VV, \dP_0)$ -- together with the structure of the tensor algebra $T(\VV^*)$ -- is sufficient for constructing differentiable programming spaces $\dP_\infty$, using linear combinations of elements of $\dP_0\otimes T(\VV^*)$. This motivates the following definition.
+
+\begin{definition}[Virtual tensor machine]\label{def:analyticMachine}
+The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiable virtual machine, where
+   
+    \begin{itemize}
+    \item
+    $\VV$ is a finite dimensional vector space
+    \item
+    $\VV\otimes \T(\VV^*)$ is the virtual memory space
+    \item
+    $\dP_0$ is an analytic programming space over $\VV$.
+    \end{itemize}
+  \end{definition}
+
+\noindent When composing contractions \eqref{eq:Contraction} of the memory with activation functions $\phi\in\dP$, we note that fully connected \emph{tensor networks},
+\begin{equation} \label{eq:tenWord}
+\NN(v)=\phi_k\circ W_k\circ\cdots\circ\phi_0\circ W_0(v),
+\end{equation}
+are basic programs in a virtual tensor machine (the vanilla fully connected neural network is  captured by the restriction $\forall_i(W_i\in\VV_1)$). The formulation \eqref{eq:tenWord} is trivially generalized to convolutional models, but is omitted here for brevity.
+
+
