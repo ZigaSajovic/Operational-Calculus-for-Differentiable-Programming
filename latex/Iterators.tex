@@ -93,9 +93,13 @@ Upon applying it to a program at a particular point $\vv\in \VV$ this becomes
   \mathcal{R}^{n-1}_+\dP(\vv)=\Bigg\{B_0\D^{-1}\dP(t)+\sum\limits_{i=1}^{\infty}B_i\frac{\D^{i-1}\dP(t)}{i!}\Bigg\}\Bigg\vert_{\vv_0}^{n\vv} \Big(\vv\Big),
     \end{equation}
 where the evaluation at $\vv\in \VV$, as by \eqref{eq:polynomial_tensor}, performs the needed translation, as the image of the operator $\mathcal{R}^{n-1}_+$ is an element of the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$.
-Note that the number of iterations, $n$, is the only remaining free variable, as desired (also note that when $p\in\dP$ is an univariate mapping, the expression \eqref{eq:Rn+P} recovers the Euler-Maclaurin integral formula
-\footnote{For example, the reader can apply \eqref{eq:Rn+P} to any function of the form $x^m$ and recover its closed form solutions.}
-\cite{apostol1999elementary}). Furthermore, due to the operational algebra of higher order programs established by our model, we can compute the operator of iterating velocity (and higher order change) of the $n$-th iterate by differentiating the operator $\mathcal{R}^{n-1}_+$ itself. Reverting to the form \eqref{eq:Rn+Basic} and substituting \eqref{eq:sn=ed}, we have
+Note that the number of iterations, $n$, is the only remaining free variable, as desired.
+\begin{remark}
+  When $p\in\dP$ is an univariate mapping, the expression \eqref{eq:Rn+P} recovers the Euler-Maclaurin integral formula \cite{apostol1999elementary}, which is demonstrated by applying the operator \eqref{eq:Rn+} to the function $x^m$
+$$\mathcal{R}^n_+(x^m)=\frac{1}{m+1}\sum_{k=0}^m{m+1\choose k}B_kn^{m+1-k},$$
+and producing the closed form solution.
+\end{remark}
+Furthermore, due to the operational algebra of higher order programs established by our model, we can compute the operator of iterating velocity (and higher order change) of the $n$-th iterate by differentiating the operator $\mathcal{R}^{n-1}_+$ itself. Reverting to the form \eqref{eq:Rn+Basic} and substituting \eqref{eq:sn=ed}, we have
 \begin{equation}
   \frac{d^k}{dn^k}\mathcal{R}^{n-1}_+=\frac{d^k}{dn^k}\Big((1-e^{n\D})(\frac{1}{1-e^\D})\Big)=\mathcal{S}^n(\frac{\D^n}{1-e^\D}),
    \end{equation}
