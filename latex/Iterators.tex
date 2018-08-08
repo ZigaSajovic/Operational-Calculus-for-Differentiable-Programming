@@ -80,9 +80,9 @@ Recognizing that $(1-\mathcal{S}^n)$ represents the action of evaluating a progr
   \end{equation}
 assuming invertibility at the endpoints. The parenthesised expression, $\frac{\D}{1-e^\D}$, is an algebraic encoding of a higher-order program, which is be expanded into explicit form inside the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$. Doing so, we recognize
 \begin{equation}
-    	\frac{h\D}{1-e^{h\D}}=\sum\limits_{n=0}^{\infty}B_n\frac{(h\D)^n}{n!}
+    	\frac{h\D}{1-e^{h\D}}=\sum\limits_{i=0}^{\infty}B_i\frac{(h\D)^i}{i!}
     \end{equation}
-$B_n$ to be the $n$-th Bernoulli number. Thus the higher order program
+$B_i$ to be the $n$-th Bernoulli number. Thus the higher order program
 $$\mathcal{R}^{n-1}_+\in \VV\otimes \T(\VV^*):\VV\to\VV$$
 is expressed as 
     \begin{equation}\label{eq:Rn+}
@@ -96,7 +96,7 @@ where the evaluation at $\vv\in \VV$, as by \eqref{eq:polynomial_tensor}, perfor
 Note that the number of iterations, $n$, is the only remaining free variable, as desired.
 \begin{remark}
   When $p\in\dP$ is an univariate mapping, the expression \eqref{eq:Rn+P} recovers the Euler-Maclaurin integral formula \cite{apostol1999elementary}, which is demonstrated by applying the operator \eqref{eq:Rn+} to the function $x^m$
-$$\mathcal{R}^n_+(x^m)=\frac{1}{m+1}\sum_{k=0}^m{m+1\choose k}B_kn^{m+1-k},$$
+$$\mathcal{R}^n_+(x^m)=\frac{1}{m+1}\sum_{i=0}^m{m+1\choose i}B_i\cdot n^{m+1-i},$$
 and producing the closed form solution.
 \end{remark}
 Furthermore, due to the operational algebra of higher order programs established by our model, we can compute the operator of iterating velocity (and higher order change) of the $n$-th iterate by differentiating the operator $\mathcal{R}^{n-1}_+$ itself. Reverting to the form \eqref{eq:Rn+Basic} and substituting \eqref{eq:sn=ed}, we have
