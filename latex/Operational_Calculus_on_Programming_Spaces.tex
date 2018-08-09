@@ -245,7 +245,7 @@ In this section we implement the operator of program composition within the cons
  \end{equation} is the
   push-forward through $f$ of the generalized shift
   operator $e^{h\D}$.
-This also generalizes the \emph{U combinator} to its forward and backward modes, by restring the \emph{composers} \eqref{eq:opGenKompo} domain to a single function (i.e. $f$ and $g$ are the same mapping).
+This also generalizes the \emph{U combinator} to its forward and backward modes, by restricting the \emph{composers} \eqref{eq:opGenKompo} domain to a single function (i.e. $f$ and $g$ are the same mapping).
  
   \begin{remark}[Unified AD]\label{trd:reverseForward}
   Because of \eqref{eq:induced_map} and \eqref{eq:program_derivative} every program can be seen as $P=P_n\circ\ldots P_1$. Thus applying the operators
@@ -288,7 +288,7 @@ The derivative $\frac{d}{dh}$ of $\eqref{eq:opKompo}$ is
  \begin{equation}\label{eq:d^2comp}
  \left(\D_f(\D^2_gg)\right)e^{h\D_g}\exp(\D_fe^{h\D_g})(g)+(\D^2_f(\D_gg)^2)e^{2h\D_g}\exp(\D_fe^{h\D_g})(g)
  \end{equation}
- The operator is always shifted to the evaluating point $\eqref{eq:specProg}$ $\vv\in \VV$, thus, only the behavior in the limit as $h\to 0$ is of importance. Taking this limit in the expression $\eqref{eq:d^2comp}$ we obtain the operator
+ The operator is always shifted to the evaluating point $\eqref{eq:specProg}$ $\vv\in \VV$, thus, only the behaviour in the limit as $h\to 0$ is of importance. Taking this limit in the expression $\eqref{eq:d^2comp}$ we obtain the operator
  \begin{equation*}
   \left(\D_f(\D^2_gg)+\D^2_f(\D_gg)^2\right)\exp(\D_f):\dP\to\D^2\dP(g)
  \end{equation*}
@@ -314,7 +314,7 @@ The derivative $\frac{d}{dh}$ of $\eqref{eq:opKompo}$ is
 
  \subsection{Automatically differentiable derivatives}\label{sec:orderReduction}
  
- The ability to use $k$-th derivative of a program $P_1\in\dP$ as part of a differentiable program $P_2\in\dP$ appears as useful in many fields (e.g. \cite{StatMC}). For that to be sensible, we must be able to treat the ($k$-th) derivative itself as a differentiable program $P^{\prime k}\in\dP$. This is what motivates the following theorem. 
+ The ability to use $k$-th derivative of a program $P_1\in\dP$ as part of a differentiable program $P_2\in\dP$ appears useful in many fields (e.g. \cite{StatMC}). For that to be sensible, we must be able to treat the ($k$-th) derivative itself as a differentiable program $P^{\prime k}\in\dP$. This is what motivates the following theorem. 
 
 \begin{theorem}[Order reduction]\label{izr:reductionMap}
 There exists a reduction of order map $\phi:\dP_n\to \dP_{n-1}$, such that the
@@ -340,5 +340,5 @@ By Theorem \ref{izr:reductionMap}, $n$-differentiable $k$-th derivatives of a pr
 \end{equation*}
 \end{corollary}
 
-Thus, by corollary \ref{cor:extraxtDerivatives}, the ability of writing differentiable programs that act on derivatives of other programs in well defined within the language. This is a crucial feature, as stressed by other authors \cite{AD1,AD2}. Note that in order to use $k$-th derivative of $P_2$ in an $n$-differentiable program $P_1$, then $P_2$ must have been $(k+n)$-differentiable before $\phi^k$ was applied to it.
+Thus, by corollary \ref{cor:extraxtDerivatives}, the writing of differentiable programs that act on derivatives of other programs is well defined within the language. This is a crucial feature, as stressed by other authors \cite{AD1,AD2}. Note that in order to use $k$-th derivative of $P_2$ in an $n$-differentiable program $P_1$, then $P_2$ must have been $(k+n)$-differentiable before $\phi^k$ was applied to it.
 
