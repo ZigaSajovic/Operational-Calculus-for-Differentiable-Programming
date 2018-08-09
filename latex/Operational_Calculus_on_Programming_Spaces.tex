@@ -152,17 +152,18 @@ of $h$ have coinciding Taylor series and are therefore equal.\\
  \begin{remark}\label{konvVrst}
  Theorem \ref{izr:e^d} can be generalized to convolutions using the Volterra series \cite{volterra}.
  \end{remark}
-It follows trivially from the above theorem that the operator $e^{h\D}$ is an
-automorphism of the programming algebra $\dP_\infty$, 
+It follows trivially from the above theorem that the operator $e^\D$ is contained strictly within the language
+\begin{equation}
+  e^{h\D}(\dP_0)\subset\dP_0\otimes \T(\VV^*),
+\end{equation}
+ and that the operator $e^{h\D}$ is an automorphism of the programming algebra $\dP_\infty$, 
 \begin{equation}\label{eq:prod}
   e^{h\D}(p_1\cdot p_2)=e^{h\D}(p_1)\cdot e^{h\D}(p_2)
  \end{equation}
- where $\cdot$ stands for any bilinear map.
-
+ where $\cdot$ stands for any bilinear map. 
  \begin{remark}[Generalized shift operator]\label{rmrk:genShift}
  The operator $e^{h\D}:\dP\times \VV\to \VV\otimes \T(\VV^*)$ evaluated at $h=1$
  is a broad generalization of the shift operator \cite{OpCalc}.
-% The theory presented in this section offers more than a mere shift, which will become apparent in the coming sections.
  \end{remark}
  
  For a specific $\vv_0\in\VV$, the generalized shift operator is denoted by
