@@ -54,12 +54,9 @@ extending linearly on the whole space $\VV\otimes\T(\VV^*)$
 
  \subsection{Tensor Series Expansion}\label{sec:Vrsta}
 
-%With this, the basis of our framework has been established.
-%We can now start implementing operators, that serve the desired purpose
-%The first thing we need is an operator thaz would shift the function from its initial value
-%This can than be used for implementing iterators and composers
+With the fundamentals of our framework established, we can begin to implement operators within its algebra. We begin by implementing an operator that shifts the program from its initial value and can later be used for the implementation of iterators and composers.
 
-In th space spanned by the set $\DD^n=\{\D^k;\quad 0\le k\le n\}$ over a field $K$, such an operator can be defined as
+In the space spanned by the set $\DD^n=\{\D^k;\quad 0\le k\le n\}$ over a field $K$, such an operator can be defined as
  \begin{equation*}
   e^{h\D}=\sum\limits_{n=0}^{\infty}\frac{(h\D)^n}{n!}
  \end{equation*}
@@ -183,18 +180,18 @@ automorphism of the programming algebra $\dP_\infty$,
 
 %This part should be somehow included in the begining, how we will write operators that serve our purpose
 %  \begin{remark}
-%  Corollary $\ref{izr:P_n}$ through \eqref{eq:P_algebra} implies
-%         $e^{h\D}(\dP_0)\subset\dP_0\otimes \T(\VV^*)$      
-%  which enables efficient implementation by operator $\sumd$. 
-% \end{remark}
+  %Corollary $\ref{izr:P_n}$ through \eqref{eq:P_algebra} implies
+         %$e^{h\D}(\dP_0)\subset\dP_0\otimes \T(\VV^*)$      
+  %which enables efficient implementation by operator $\sumd$. 
+ %\end{remark}
 
 
 %Implement U combinator via this
 
 \subsection{Operator of Program Composition}\label{sec:compsition}
 
-In this section we implement the operator of program composition within the constructed algebraic language. Such a \emph{composer} can than be used to implement the analog of the \emph{U combinator} (which facilitates recursion) and other constructs. Furthermore, due to the differentiable nature of the employed objects, such a \emph{composer} generalizes both forward (e.g. \cite{PcAD}) and reverse (e.g. \cite{ReverseAD}) mode of
- automatic differentiation of arbitrary order, unified under a single operator. We will than demonstrate how to perform calculations on the operator level, before they are applied to a particular programming space, which serves as an added level of abstraction.
+In this section we implement the operator of program composition within the constructed algebraic language. Such a \emph{composer} can than be used to implement the analog of the \emph{U combinator} (which facilitates recursion) and other constructs. Furthermore, due to the differentiable nature of the employed framework, such a \emph{composer} generalizes both forward (e.g. \cite{PcAD}) and reverse (e.g. \cite{ReverseAD}) mode of
+ automatic differentiation of arbitrary order, unified under a single operator. We will than demonstrate how to perform calculations on the operator level, before they are applied to a particular programming space, serving as an added level of abstraction.
  
  \begin{theorem}[Program composition]\label{izr:kompo}
  Composition of maps $\dP$ is expressed as
@@ -329,7 +326,7 @@ The derivative $\frac{d}{dh}$ of $\eqref{eq:opKompo}$ is
 
  \subsection{Automatically differentiable derivatives}\label{sec:orderReduction}
  
- The ability to use $k$-th derivative of a program $P_1\in\dP$ as part of a differentiable program $P_2\in\dP$ appears to be useful in many fields (e.g. \cite{StatMC}). For that to be sensible, we must be able to treat the ($k$-th) derivative itself as a differentiable program $P^{\prime k}\in\dP$. This is what motivates the following theorem. 
+ The ability to use $k$-th derivative of a program $P_1\in\dP$ as part of a differentiable program $P_2\in\dP$ appears as useful in many fields (e.g. \cite{StatMC}). For that to be sensible, we must be able to treat the ($k$-th) derivative itself as a differentiable program $P^{\prime k}\in\dP$. This is what motivates the following theorem. 
 
 \begin{theorem}[Order reduction]\label{izr:reductionMap}
 There exists a reduction of order map $\phi:\dP_n\to \dP_{n-1}$, such that the
@@ -355,12 +352,5 @@ By Theorem \ref{izr:reductionMap}, $n$-differentiable $k$-th derivatives of a pr
 \end{equation*}
 \end{corollary}
 
-Thus, by corollary \ref{cor:extraxtDerivatives}, the ability of writing differentiable programs that act on derivatives of other programs in well defined within the language. This is a crucial feature, as stressed by other authors \cite{AD1,AD2}. Please note that in order to use $k$-th derivative of $P_2$ in an $n$-differentiable program $P_1$, then $P_2$ must have been $(k+n)$-differentiable before $\phi^k$ was applied to it.
-
-%----------------------------------------
-%----------------------------------------
-%----------------------------------------
-%----------------------------------------
-%----------------------------------------
-
+Thus, by corollary \ref{cor:extraxtDerivatives}, the ability of writing differentiable programs that act on derivatives of other programs in well defined within the language. This is a crucial feature, as stressed by other authors \cite{AD1,AD2}. Note that in order to use $k$-th derivative of $P_2$ in an $n$-differentiable program $P_1$, then $P_2$ must have been $(k+n)$-differentiable before $\phi^k$ was applied to it.
 
