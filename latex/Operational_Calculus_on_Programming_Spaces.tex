@@ -191,8 +191,8 @@ It follows trivially from the above theorem that the operator $e^\D$ is containe
 
 \subsection{Operator of Program Composition}\label{sec:compsition}
 
-In this section we implement the operator of program composition within the constructed algebraic language. Such a \emph{composer} can than be used to implement the analog of the \emph{U combinator} (which facilitates recursion) and other constructs. Furthermore, due to the differentiable nature of the employed framework, such a \emph{composer} generalizes both forward (e.g. \cite{PcAD}) and reverse (e.g. \cite{ReverseAD}) mode of
- automatic differentiation of arbitrary order, unified under a single operator. We will than demonstrate how to perform calculations on the operator level, before they are applied to a particular programming space, serving as an added level of abstraction.
+In this section we implement the operator of program composition within the constructed algebraic language. Such a \emph{composer} can than be used to implement the analog of the \emph{U combinator} (which facilitates recursion) and other constructs. Furthermore, due to the differentiable nature of the language, such a \emph{composer} generalizes both forward (e.g. \cite{PcAD}) and reverse (e.g. \cite{ReverseAD}) mode of
+ automatic differentiation of arbitrary order, unified under a single operator. Upon completion we will demonstrate how to perform calculations on the operator level, before they are applied to a particular programming space, which serves as a level of abstraction over the tensor series algebra of the memory space.
  
  \begin{theorem}[Program composition]\label{izr:kompo}
  Composition of maps $\dP$ is expressed as
@@ -255,18 +255,6 @@ This also generalizes the \emph{U combinator} to its forward and backward modes,
   operators $\exp(\D_fe^{h\D_g})(P_{n-i+1},\cdot)$ in reverse order (and
   projecting) is equivalent to reverse mode automatic differentiation.
  \end{remark}
- 
- %  \begin{remark}
- %  The operator \eqref{eq:kompo} can be generalized for the notion of a pullback
- %  to arbitrary operators. 
- %  \end{remark}
- 
- % Thus, through $\eqref{eq:kompo}$ and all its' descendants (exponents), the
- % operator $(\ref{eq:opKompo})$ grants invariance to the point in execution of a
- % program, which is important when proving algorithm's correctness. This is
- % analogous to the principle of general covariance \citep[see
- % section 7.1 in a book by][]{GeneralCovariance} in general relativity, the invariance of the form of physical laws
- % under arbitrary differentiable coordinate transformations.
 
    \begin{corollary}\label{izr:komp_homo}
    The operator $e^{h\D}$ commutes with composition over $\dP$
@@ -280,16 +268,15 @@ This also generalizes the \emph{U combinator} to its forward and backward modes,
    \end{proof}
 
 Such calculations can be made easier, by completing them on
-the level of operators, thus avoiding the need to manipulate tensor series. This serves as a level of abstraction.
+the level of operators, thus avoiding the need to manipulate tensor series. This serves as a level of abstraction over the tensor series algebra of the memory space.
 
 The derivative $\frac{d}{dh}$ of $\eqref{eq:opKompo}$ is 
  \begin{equation}\label{eq:dexp}
- \frac{d}{dh}\exp(\D_fe^{h\D_g})(g)=\D_f(\D_gg)e^{h\D_g}\exp(\D_fe^{h\D_g})(g)
- \end{equation}
- 
+ \frac{d}{dh}\exp(\D_fe^{h\D_g})(g)=\D_f(\D_gg)e^{h\D_g}\exp(\D_fe^{h\D_g})(g).
+ \end{equation} 
  We note an important distinction to the operator $e^{h\D_g}$, the derivative of which is
  \begin{equation}\label{eq:de}
-\frac{d}{dh}e^{h\D_g}=\D_ge^{h\D_g}
+\frac{d}{dh}e^{h\D_g}=\D_ge^{h\D_g}.
  \end{equation}
  We may now compute derivatives (of arbitrary order) of the \emph{composer} itself.
 
