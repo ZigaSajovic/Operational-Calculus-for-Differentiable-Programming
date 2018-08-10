@@ -24,23 +24,23 @@ that in the image of $h$, iterations of $p$ become multiplication with the eigen
 Note that we can express the eigen matrix $\Lambda$ by differentiating $\eqref{eq:kh}$ at the fixed point $\vv_f$,
 $$\D h\left(p\left(\vv_f\right)\right)\cdot\D p\left(\vv_f\right)=\Lambda\cdot\D h\left(\vv_f\right)\implies\D p\left(\vv_f\right)=\Lambda.$$
 
-The derived equips us to inquire about the rate of change of the values of a program $p$ in relation to $n$, the number of iterations. Lets define iterating velocity as
+With foundations established, we can proceed to inquire about the rate of change of the values of a program $p$ in relation to $n$, the number of iterations. Lets define the \emph{rate of change operator} $\Psi$ 
   \begin{equation}
-  v(p^n)=\D_np^n(x)
+    \Psi:p^n\to\D_np^n,
   \end{equation}
-Of course
+that maps an iterate $p^n$ to its \emph{iterating velocities} $\D_n p^n$. Of course
   \begin{equation}
-  v(p^n(\vv_f))=0
+  \Psi\left(p^n\right)\left(\vv_f\right)=0
   \end{equation}
-the iterating velocity at the fixed point $a$ is constantly zero, which is deduced from the $\eqref{eq:kh}$ and reassures our intuition. Next, we introduce a change of variables $\Lambda= e^\nu$ for mathematical convenience and proceed towards computing the iterating velocity.
-  $$\D_nh(p^n)=\D_n(e^{\nu n}h(x))$$
+the iterating velocity of any iterate at the fixed point $\vv_f$ is constantly zero, which is deduced from the $\eqref{eq:kh}$ and reassures our intuition. Next, we introduce a change of variables $\Lambda= e^\nu$ for mathematical convenience and proceed towards computing the iterating velocity.
+  $$\D_nh\left(p^n\right)=\D_n\left(e^{\nu n}\cdot h\right)$$
   $$\implies$$
-  $$\D h(p^n(x))\D_np^n(x)=\nu e^{\nu n}h(x) \land e^{\nu n}h(x)=h(p^n(x))$$
+  $$\D h\left(p^n\right)\cdot\D_np^n=\nu\cdot e^{\nu n}\cdot h \land e^{\nu n}\cdot h=h\left(p^n\right)$$
   $$\implies$$
   \begin{equation}\label{eq:iter_vel}
-  v=\nu(\D h)^{-1}h
+  \Psi=\nu\cdot(\D h)^{-1}\cdot h
   \end{equation}
-The iterating velocity
+The rate of change operator $\Psi$ and iterating velocities
 \footnote{Higher derivatives can be derived by induction.}
 \eqref{eq:iter_vel} can be used to study the importance of future iterations for the accumulating result, and aid with decisions on early stopping. Furthermore, the above indicates a subclass of programs for which the Halting problem can be analysed through the study of convergence and fixed points.
 
