@@ -30,9 +30,9 @@ With foundations established, we can proceed to inquire about the rate of change
   \end{equation}
 that maps an iterate $p^n$ to its \emph{iterating velocities} $\D_n p^n$. Of course
   \begin{equation}
-  \Psi\left(p^n\right)\left(\vv_f\right)=0
+  \Psi\left(p^n\right)\left(\vv_f\right)=0,
   \end{equation}
-the iterating velocity of any iterate at the fixed point $\vv_f$ is constantly zero, which is deduced from the $\eqref{eq:kh}$ and reassures our intuition. Next, we introduce a change of variables $\Lambda= e^\nu$ for mathematical convenience and proceed towards computing the iterating velocity.
+the iterating velocities of any iterate at the fixed point $\vv_f$ are constantly zero, which is deduced from the $\eqref{eq:kh}$ and reassures our intuition. Next, we introduce a change of variables $\Lambda= e^\nu$ for mathematical convenience and proceed towards computing the iterating velocity.
   $$\D_nh\left(p^n\right)=\D_n\left(e^{\nu n}\cdot h\right)$$
   $$\implies$$
   $$\D h\left(p^n\right)\cdot\D_np^n=\nu\cdot e^{\nu n}\cdot h \land e^{\nu n}\cdot h=h\left(p^n\right)$$
@@ -44,7 +44,7 @@ The rate of change operator $\Psi$ and iterating velocities
 \footnote{Higher derivatives can be derived by induction.}
 \eqref{eq:iter_vel} can be used to study the importance of future iterations for the accumulating result, and aid with decisions on early stopping. Furthermore, the above indicates a subclass of programs for which the Halting problem can be analysed through the study of convergence and fixed points.
 
-The computation of the eigen map $h$ \eqref{eq:kh} was solved by Bridges \cite{bridges2016solution} for any $p$ with a power series representation. This result is extended to tensor series by the isomorphism to their quotient. Hence, as we can expand any $p\in\dP$ into a tensor series by the use of the operator $e^\D$, the result also holds for any $p\in\dP$ by Theorem $\ref{izr:e^d}$. 
+The computation of the eigen map $h$ \eqref{eq:kh} was solved by Bridges \cite{bridges2016solution} for any $p$ with a power series representation. This result is extended to tensor series by the isomorphism to their quotient. Hence, as we can expand any $p\in\dP$ into a tensor series by the use of the operator $e^\D$, by Theorem $\ref{izr:e^d}$ the result also holds for any $p\in\dP$. 
 
 
 \subsection{ReduceSum in the Language of Operational Calculus}
