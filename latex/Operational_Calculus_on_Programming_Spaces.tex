@@ -69,14 +69,14 @@ In the space spanned by the set $\DD^n=\{\D^k;\quad 0\le k\le n\}$ over a field 
  \end{equation}
 The operator $e^{h\D}$ is a mapping between programming spaces $\eqref{eq:F_n}$
  \begin{equation*}
-  e^{h\D}:\dP\to\dP_\infty.
+  e^{h\D}:\dP\to\dP_\infty,
  \end{equation*}
- It also defines a map
+in which partial applications can be made complete
   \begin{equation}\label{eq:specProg}
-    e^{h\D}:\dP\times \VV\to \VV\otimes \T(\VV^*),
+    e^{h\D}:\dP\to \Big\{\VV\to \VV\otimes \T(\VV^*)\Big\},
   \end{equation}
 by taking the image of the map $e^{h\D}(P)$ at a certain point $\vv\in \VV$.  
-We may construct a map from the space of programs,
+Thus, we construct a map from the space of programs,
 to the space of polynomials using  $\eqref{eq:specProg}$. Note that the space of
 multivariate polynomials 
 $\VV\to K$ is isomorphic to symmetric algebra $S(\VV^*)$, which is in turn a
@@ -85,10 +85,10 @@ To any element of
  $\VV\otimes T(\VV^*)$ one can attach corresponding element of $\VV\otimes S(\VV^*)$
  namely a polynomial map  $\VV\to \VV$. Thus, similarly to \eqref{eq:P_algebra}, we consider the completion of the symmetric algebra $S(\VV^*)$ as the \emph{formal power series} $\Ss(\VV^{*})$, which is in turn isomorphic to a quotient of \emph{tensor series algebra} $\T(\VV^*)$. This leads to 
  \begin{equation}\label{eq:pToPol}
-  e^{h\D}: \dP\times \VV\to \VV\otimes \Ss(\VV^*)
+  e^{h\D}:\dP\to \Big\{\VV\to \VV\otimes \Ss(\VV^*)\Big\}.
  \end{equation}
  For any element $\vv_0\in \VV$, the expression $e^{h\D}(\cdot,\vv_0)$ is a map $\dP\to
- \VV\otimes \Ss(\VV^*)$, mapping a program to a formal power series.
+ \VV\otimes \Ss(\VV^*)$, mapping a program to a formal power series (by switching the order of partial applications in \eqref{eq:pToPol}).
 
  We can express the
  correspondence between multi-tensors in $\VV\otimes T(\VV^*)$ and polynomial maps
