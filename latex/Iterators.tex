@@ -94,7 +94,7 @@ Upon applying it to a program at a particular point $\vv\in \VV$ this becomes
 where the evaluation at $\vv\in \VV$ as by \eqref{eq:polynomial_tensor}, performs the needed translation
 \footnote{Both the translation and the shift are to be performed (at) by the same point $\vv\in\VV$.},
 as the image of the operator $\mathcal{R}^{n-1}_+$ is an element of the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$.
-Note that the number of iterations, $n$, is the only remaining free variable, as desired.
+Note that $n$, the number of iterations, is the only remaining free variable, as desired.
 \begin{remark}
   When $p\in\dP$ is an univariate mapping, the expression \eqref{eq:Rn+P} recovers the Euler-Maclaurin integral formula \cite{apostol1999elementary}, which is demonstrated by applying the operator \eqref{eq:Rn+} to the function $x^m$
 $$\mathcal{R}^n_+(x^m)=\frac{1}{m+1}\sum_{i=0}^m{m+1\choose i}B_i\cdot n^{m+1-i},$$
@@ -102,11 +102,11 @@ and producing the closed form solution.
 \end{remark}
 Furthermore, due to the operational algebra of higher order programs established by our model, we can compute the operator of iterating velocity (and higher order change) of the $n$-th iterate by differentiating the operator $\mathcal{R}^{n-1}_+$ itself. Reverting to the form \eqref{eq:Rn+Basic} and substituting \eqref{eq:sn=ed}, we have
 \begin{equation}
-  \frac{d^k}{dn^k}\mathcal{R}^{n-1}_+=\frac{d^k}{dn^k}\Big((1-e^{n\D})(\frac{1}{1-e^\D})\Big)=\mathcal{S}^n(\frac{\D^n}{1-e^\D}),
+  \frac{d^k}{dn^k}\mathcal{R}^{n-1}_+=\frac{d^k}{dn^k}\left(\left(1-e^{n\D}\right)\left(\frac{1}{1-e^\D}\right)\right)=\mathcal{S}^n\left(\frac{\D^n}{1-e^\D}\right),
    \end{equation}
 where commutativity of shifting and differentiating was used. Noting that $\mathcal{S}^n$ simply shifts the operand in the direction of $\vv$ by a factor of $n$, the explicit form 
 \begin{equation}
-        \frac{d^k}{dn^k}\mathcal{R}^{n-1}_+\dP\vert_{n=N}(\vv)=\Big(\sum\limits_{i=0}^{\infty}B_i\frac{\D^{N-1+i}\dP(N\vv)}{i!}\Big)\Big(\vv\Big)
+        \frac{d^k}{dn^k}\mathcal{R}^{n-1}_+\dP\vert_{n=N}(\vv)=\left(\sum\limits_{i=0}^{\infty}B_i\frac{\D^{N-1+i}\dP\left(N\vv\right)}{i!}\right)\Big(\vv\Big)
         \end{equation}
 where the evaluation at $\vv\in \VV$ once again performs the needed translation.
 
