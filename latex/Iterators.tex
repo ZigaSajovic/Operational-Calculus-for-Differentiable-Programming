@@ -68,14 +68,14 @@ upon application.
 With this we turn towards computing with operators alone to harness the algebraic power of our framework. We write
 $$(1+\mathcal{S}+\mathcal{S}^2+\cdots+\mathcal{S}^n)=1+\mathcal{S}(1+\mathcal{S}+\mathcal{S}^2+\cdots+\mathcal{S}^{n-1})$$
    $$\implies$$
-   $$1-\mathcal{S}^n=(1-S)\mathcal{R}^{n-1}_+$$
+   $$1-\mathcal{S}^n=\left(1-S\right)\mathcal{R}^{n-1}_+$$
    $$\implies$$
   \begin{equation}
-\mathcal{R}^{n-1}_+=(1-\mathcal{S}^n)(\frac{1}{1-\mathcal{S}}),
+\mathcal{R}^{n-1}_+=\left(1-\mathcal{S}^n\right)\left(\frac{1}{1-\mathcal{S}}\right),
   \end{equation}
 where $\frac{1}{1-\Ss}$ is to be understood in the sense of formal tensor series. We will denote $(1-\mathcal{S}^n)$ by $\Big[\cdot\Big]^n_{\vv_0}$, recognizing that it represents the action of shifting the program in the direction of $\vv$ by a fraction of $n$, from its initial position $\vv_0$, and subtracting the two; $\vv$ is yet to be determined. Taking Theorem \ref{izr:e^d} into account we write
   \begin{equation}\label{eq:Rn+Basic}
-    \mathcal{R}^{n-1}_+=\Bigg[\D^{-1}(\frac{\D}{1-e^\D})\Bigg]^n_{\vv_0}
+    \mathcal{R}^{n-1}_+=\Bigg[\D^{-1}\left(\frac{\D}{1-e^\D}\right)\Bigg]^n_{\vv_0}
   \end{equation}
 assuming invertibility at the endpoints. The parenthesised expression, $\frac{\D}{1-e^\D}$, is an algebraic encoding of a higher-order program, which is to be expanded into explicit form inside the tensor series algebra of the programming space $\dP\otimes \T(\VV^*)$ upon application. Doing so, we recognize
 \begin{equation}
