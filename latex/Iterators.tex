@@ -91,7 +91,9 @@ Upon applying it to a program at a particular point $\vv\in \VV$ this becomes
 \begin{equation}\label{eq:Rn+P}
   \mathcal{R}^{n-1}_+\dP(\vv)=\Bigg[B_0\D^{-1}\dP(t)+\sum\limits_{i=1}^{\infty}B_i\frac{\D^{i-1}\dP(t)}{i!}\Bigg]_{\vv_0}^{n\vv} \Big(\vv\Big),
     \end{equation}
-where the evaluation at $\vv\in \VV$, as by \eqref{eq:polynomial_tensor}, performs the needed translation, as the image of the operator $\mathcal{R}^{n-1}_+$ is an element of the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$.
+where the evaluation at $\vv\in \VV$ as by \eqref{eq:polynomial_tensor}, performs the needed translation
+\footnote{Both the translation and the shift are to be performed (at) by the same point $\vv\in\VV$.},
+as the image of the operator $\mathcal{R}^{n-1}_+$ is an element of the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$.
 Note that the number of iterations, $n$, is the only remaining free variable, as desired.
 \begin{remark}
   When $p\in\dP$ is an univariate mapping, the expression \eqref{eq:Rn+P} recovers the Euler-Maclaurin integral formula \cite{apostol1999elementary}, which is demonstrated by applying the operator \eqref{eq:Rn+} to the function $x^m$
