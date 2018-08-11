@@ -229,22 +229,20 @@ In this section we implement the operator of program composition within the cons
  \end{proof}       
  The Theorem $\ref{izr:kompo}$ enables an invariant implementation of the operator of program composition (i.e. the \emph{composer}) in $\dP_n$, expressed as a tensor series through $\eqref{eq:kompo}$ and $\eqref{eq:dComposite}$. 
  
-  By fixing the second map $g$ in  
+  The operator of program composition 
   \begin{equation}\label{eq:opGenKompo}
- \exp(\D_fe^{h\D_g}): \dP\times\dP\to\dP_\infty,
+ \exp(\D_fe^{h\D_g}): \dP\to\dP\to\dP_\infty,
   \end{equation}
-  the operator
+  allows two kinds of partial applications. The operator resulting from fixing the second map $g$ in \eqref{eq:opGenKompo},
   \begin{equation}
    \exp(\D_fe^{h\D_g})(\cdot,g)=g^*\left( e^{h\D} \right)\label{eq:opKompo}
  \end{equation}
-  is the pullback through $g$ of the generalized shift
-  operator $e^{h\D}$. While by
-  fixing the first map $f$ in \eqref{eq:opGenKompo}, the operator
+  is the pullback of the generalized shift
+  operator $e^{h\D}$ through $g$. While the operator resulting from fixing the first map $f$ in \eqref{eq:opGenKompo},
   \begin{equation}
  \exp(\D_fe^{h\D_g})(f,\cdot)=f_*\left( e^{h\D} \right)\label{eq:opKompoForward}
- \end{equation} is the
-  push-forward through $f$ of the generalized shift
-  operator $e^{h\D}$.
+ \end{equation} 
+ is the push-forward of the generalized shift operator $e^{h\D}$ through $f$.
 This also generalizes the \emph{U combinator} to its forward and backward modes, by restricting the \emph{composers} \eqref{eq:opGenKompo} domain to a single function (i.e. $f$ and $g$ are the same mapping).
  
   \begin{remark}[Unified AD]\label{trd:reverseForward}
