@@ -71,13 +71,13 @@ $$(1+\mathcal{S}+\mathcal{S}^2+\cdots+\mathcal{S}^n)=1+\mathcal{S}(1+\mathcal{S}
    $$1-\mathcal{S}^n=(1-S)\mathcal{R}^{n-1}_+$$
    $$\implies$$
   \begin{equation}
-\mathcal{R}^{n-1}_+=(1-\mathcal{S}^n)(\frac{1}{1-\mathcal{S}})
+\mathcal{R}^{n-1}_+=(1-\mathcal{S}^n)(\frac{1}{1-\mathcal{S}}),
   \end{equation}
-We will denote $(1-\mathcal{S}^n)$ by $\Big[\cdot\Big]^n_{\vv_0}$, recognizing that it represents the action of shifting the program in the direction of $\vv$ by a fraction of $n$, from its initial position $\vv_0$, and subtracting the two; $\vv$ is yet to be determined. Taking Theorem \ref{izr:e^d} into account we write
+where $\frac{1}{1-\Ss}$ is to be understood in the sense of formal tensor series. We will denote $(1-\mathcal{S}^n)$ by $\Big[\cdot\Big]^n_{\vv_0}$, recognizing that it represents the action of shifting the program in the direction of $\vv$ by a fraction of $n$, from its initial position $\vv_0$, and subtracting the two; $\vv$ is yet to be determined. Taking Theorem \ref{izr:e^d} into account we write
   \begin{equation}\label{eq:Rn+Basic}
     \mathcal{R}^{n-1}_+=\Bigg[\D^{-1}(\frac{\D}{1-e^\D})\Bigg]^n_{\vv_0}
   \end{equation}
-assuming invertibility at the endpoints. The parenthesised expression, $\frac{\D}{1-e^\D}$, is an algebraic encoding of a higher-order program, which is be expanded into explicit form inside the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$. Doing so, we recognize
+assuming invertibility at the endpoints. The parenthesised expression, $\frac{\D}{1-e^\D}$, is an algebraic encoding of a higher-order program, which is to be expanded into explicit form inside the tensor series algebra of the programming space $\dP\otimes \T(\VV^*)$ upon application. Doing so, we recognize
 \begin{equation}
     	\frac{h\D}{1-e^{h\D}}=\sum\limits_{i=0}^{\infty}B_i\frac{(h\D)^i}{i!}
     \end{equation}
