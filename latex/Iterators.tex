@@ -73,23 +73,23 @@ $$(1+\mathcal{S}+\mathcal{S}^2+\cdots+\mathcal{S}^n)=1+\mathcal{S}(1+\mathcal{S}
   \begin{equation}
 \mathcal{R}^{n-1}_+=(1-\mathcal{S}^n)(\frac{1}{1-\mathcal{S}})
   \end{equation}
-Recognizing that $(1-\mathcal{S}^n)$ represents the action of evaluating a program at endpoints and subtracting and taking Theorem \ref{izr:e^d} into account we write
+We will denote $(1-\mathcal{S}^n)$ by $\Big[\cdot\Big]^n_{\vv_0}$, recognizing that it represents the action of shifting the program in the direction of $\vv$ by a fraction of $n$, from its initial position $\vv_0$, and subtracting the two; $\vv$ is yet to be determined. Taking Theorem \ref{izr:e^d} into account we write
   \begin{equation}\label{eq:Rn+Basic}
-    \mathcal{R}^{n-1}_+=\D^{-1}(\frac{\D}{1-e^\D})\Bigg\vert_{\vv_0}^{n\vv}
+    \mathcal{R}^{n-1}_+=\Bigg[\D^{-1}(\frac{\D}{1-e^\D})\Bigg]^n_{\vv_0}
   \end{equation}
 assuming invertibility at the endpoints. The parenthesised expression, $\frac{\D}{1-e^\D}$, is an algebraic encoding of a higher-order program, which is be expanded into explicit form inside the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$. Doing so, we recognize
 \begin{equation}
     	\frac{h\D}{1-e^{h\D}}=\sum\limits_{i=0}^{\infty}B_i\frac{(h\D)^i}{i!}
     \end{equation}
 $B_i$ to be the $n$-th Bernoulli number. Thus the higher order program
-$$\mathcal{R}^{n-1}_+\in \VV\otimes \T(\VV^*):\VV\to\VV$$
+$$\mathcal{R}^{n-1}_+:\dP\to\Big\{\VV\to \VV\otimes \T(\VV^*)\Big\}$$
 is expressed as 
     \begin{equation}\label{eq:Rn+}
-      \mathcal{R}^{n-1}_+=\Bigg\{B_0\D^{-1}+\sum\limits_{i=1}^{\infty}B_i\frac{\D^{i-1}}{i!}\Bigg\}\Bigg\vert_{\vv_0}^{n\vv}.
+      \mathcal{R}^{n-1}_+=\Bigg[B_0\D^{-1}+\sum\limits_{i=1}^{\infty}B_i\frac{\D^{i-1}}{i!}\Bigg]_{\vv_0}^{n}.
     \end{equation}
 Upon applying it to a program at a particular point $\vv\in \VV$ this becomes
 \begin{equation}\label{eq:Rn+P}
-  \mathcal{R}^{n-1}_+\dP(\vv)=\Bigg\{B_0\D^{-1}\dP(t)+\sum\limits_{i=1}^{\infty}B_i\frac{\D^{i-1}\dP(t)}{i!}\Bigg\}\Bigg\vert_{\vv_0}^{n\vv} \Big(\vv\Big),
+  \mathcal{R}^{n-1}_+\dP(\vv)=\Bigg[B_0\D^{-1}\dP(t)+\sum\limits_{i=1}^{\infty}B_i\frac{\D^{i-1}\dP(t)}{i!}\Bigg]_{\vv_0}^{n\vv} \Big(\vv\Big),
     \end{equation}
 where the evaluation at $\vv\in \VV$, as by \eqref{eq:polynomial_tensor}, performs the needed translation, as the image of the operator $\mathcal{R}^{n-1}_+$ is an element of the tensor series algebra of the memory space $\VV\otimes \T(\VV^*)$.
 Note that the number of iterations, $n$, is the only remaining free variable, as desired.
