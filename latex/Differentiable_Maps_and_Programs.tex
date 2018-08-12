@@ -69,8 +69,8 @@ directional (partial) derivatives by the formula
 
 \subsection{Differentiable Programs}
 
-We want to be able to represent the derivatives of a computer program in an
-\emph{Euclidean machine} again as a program in the same \emph{Euclidean machine}. We define three subspaces of the virtual memory space $\VV$, that
+We want to be able to represent the derivative of a computer program in an
+\emph{Euclidean machine} as a program in the same \emph{Euclidean machine}. We define three subspaces of the memory space $\VV$, that
 describe how different parts of the memory influence the final result of the
 program.   
 
@@ -96,11 +96,10 @@ program memory.
   \end{equation}
 does not depend of the choice of the element 
 $\vec{f}\in F_P=(I_P+O_P)^\perp$.
-
 The space $F_P=(I_P+O_P)^\perp$ is called \emph{free space} of the program $P$.
 \end{definition}
 
-The variables $x_i$ corresponding to standard
+The variables $x_i$ corresponding to the standard
 basis vectors spanning the parameter, output and free space are called
 \emph{paramters} or \emph{input variables}, \emph{output variables} and
 \emph{free variables} correspondingly. Free variables are those that are
