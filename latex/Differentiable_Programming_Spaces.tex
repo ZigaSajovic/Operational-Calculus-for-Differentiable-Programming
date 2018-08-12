@@ -1,6 +1,6 @@
 \section{Differentiable Programming Spaces}
 
-The memory space of a program is rarely treated as more than a storage. But to endow the \emph{Euclidean machine} with extra structure, this is precisely what to focus on. Loosely speaking, functional programming is described by monoids, and as such a (multi)linear algebra description of the memory space seems the appropriate step to take in attaining the wanted structure.
+The memory space of a program is rarely treated as more than a storage. But to endow the \emph{Euclidean machine} with added structure, this is precisely what to focus on. Loosely speaking, functional programming is described by monoids, and as such a tensor algebraic description of the memory space is the appropriate step to take in attaining the wanted structure.
 
 \subsection{Memory space}
 
@@ -39,7 +39,7 @@ which is, for an arbitrary $\bfW\in\VV_n$, defined as,
 \begin{equation}
 \bfW(\vv)=\bfw_0+\bfw_1\cdot\vv+\cdots+\bfw_n\cdot(\vv)^{\otimes n}\label{eq:Contraction},
 \end{equation}
-the sum of multiple contractions (where $\bfw_i\in\VV_i$). The expression \eqref{eq:Contraction} will be rigorously defined in section \ref{sec:Vrsta}. With such a construction, the expansions and contractions of the memory space (reminiscent to the breathing of the stack) would hold meaning parallel to storing values; which is what motives the next definition.
+the sum of multiple contractions (where $\bfw_i\in\VV_i$). The expression \eqref{eq:Contraction} will be rigorously defined in Section \ref{sec:Vrsta}. With such a construction, the expansions and contractions of the memory space (reminiscent to the breathing of the stack) would hold meaning parallel to storing values; which is what motives the next definition.
 
 \begin{definition}[Virtual memory space]\label{def:VV}
 Let $(\VV,\F)$ be an Euclidean machine and let  
@@ -67,7 +67,7 @@ Let us define the following function spaces:
  \begin{equation}\label{eq:F_n}
   \F_n=\{f:\VV\to \VV\otimes T_n(\VV^*)\}
  \end{equation}
-All of these function spaces can be seen as sub spaces of $\F_\infty=\{f:\VV\to \VV\otimes
+All of these function spaces can be seen as subspaces of $\F_\infty=\{f:\VV\to \VV\otimes
 T(\VV^*)\}$, since $\VV$ is naturally embedded into $ \VV\otimes T(\VV^*)$. The
 Fréchet derivative defines an operator on the space of smooth maps in $\F_\infty$\footnote{The operator $\D$ may be defined partially for other maps as
    well, but we will handle this case later.}. We denote this operator $\D$. The image of any map
@@ -130,14 +130,14 @@ By taking the limit as $n\to \infty$, we consider
   \end{equation}
 where $\T(\VV^*)=\prod_{k=0}^\infty (\VV^*)^{\otimes k}$ is the \emph{tensor series
   algebra}, the algebra of the infinite formal tensor series.\footnote{The
-  tensor series algebra is a completion of the tensor algebra $T(\VV^*)$ in suitable topology.}
+  tensor series algebra is a completion of the tensor algebra $T(\VV^*)$ in suitable topology.} We will call \eqref{eq:P_algebra} the tensor series algebra of the programming space.
 
 \subsection{Virtual Tensor Machine}
 
-We propose an abstract computational model, that is capable of constructing differentiable programming spaces. Such a model provides a
-framework for analytic study of programs by algebraic means. 
+We propose an abstract computational model that is capable of constructing differentiable programming spaces and provides a
+framework for algebraic study of analytic properties of differentiable programs. 
 
-Following from Theorem \ref{izr:P}, the tuple $(\VV, \dP_0)$ -- together with the structure of the tensor algebra $T(\VV^*)$ -- is sufficient for constructing differentiable programming spaces $\dP_\infty$, using linear combinations of elements of $\dP_0\otimes T(\VV^*)$. This motivates the following definition.
+Following from Theorem \ref{izr:P}, the tuple $(\VV, \dP_0)$ -- together with the structure of the tensor algebra $T(\VV^*)$ -- is sufficient for constructing differentiable programming spaces $\dP_\infty$, using linear combinations of elements of the tensor series algebra of the programming space $\dP_0\otimes T(\VV^*)$. This motivates the following definition.
 
 \begin{definition}[Virtual tensor machine]\label{def:analyticMachine}
 The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiable virtual machine, where
