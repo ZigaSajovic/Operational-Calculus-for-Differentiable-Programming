@@ -1,4 +1,4 @@
-# Operational Calculus on Programming Spaces
+# Operational Calculus for Differentiable Programming
 A work in progress
 
 ## Abstract
