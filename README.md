@@ -9,3 +9,7 @@ To this purpose, we develop an _abstract computational model of automatically di
    
 We define the _operator of differentiation_ (∂) on programming spaces and, using its powers, implement the _general shift operator_ and the _operator of program composition_.
 We provide the formula for the expansion of a differentiable program into an infinite tensor series in terms of the powers of ∂. We express the operator of program composition in terms of the generalized shift operator and ∂, which implements a differentiable composition in the language. We prove that our language enables differentiable derivatives of programs by the use of the _order reduction map_. We demonstrate our models algebraic power over analytic properties of differentiable programs by analysing iterators, considering fractional iterations and their _iterating velocities_. We than solve the special case of _ReduceSum_.
+
+### Compiling the paper
+
+In order to compile the paper from source run the `compile.py` script. Consult its help by running `compile.py --help` if needed.
