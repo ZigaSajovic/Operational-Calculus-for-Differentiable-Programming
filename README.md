@@ -3,7 +3,7 @@ Repository for the paper Operational Calculus for Differentiable Programming
 
 ## Abstract
 
-In this work we present a theoretical model for differentiable programming. We present an algebraic language that enables both implementations and analysis of differentiable programs by way of its _operational calculus_.
+In this work we present a theoretical model for differentiable programming. We present an algebraic language that enables both implementations and analysis of differentiable programs by way of _operational calculus_.
 
 To this purpose, we develop an _abstract computational model of automatically differentiable programs_ of arbitrary order. In the model, programs are elements of _programming spaces_ and are viewed as maps from the _virtual memory space_ to itself. Virtual memory space is an algebra of programs, _an algebraic data structure_ one can calculate with.
    
