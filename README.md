@@ -1,5 +1,5 @@
 # Operational Calculus for Differentiable Programming
-A work in progress
+Repository for the paper Operational Calculus for Differentiable Programming
 
 ## Abstract
 
